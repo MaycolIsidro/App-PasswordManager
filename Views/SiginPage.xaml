@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.Views.SiginPage"
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout Padding="20"
+                 Spacing="10">
+        <Image Source="user"
+               Margin="0,40"
+               WidthRequest="130" />
+        <StackLayout Spacing="20">
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Nombres"
+                       PlaceholderColor="White"
+                       Text="{Binding Name}"/>
+            </Frame>
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Apellidos"
+                       PlaceholderColor="White"
+                       Text="{Binding Lastname}"/>
+            </Frame>
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Telefono"
+                       PlaceholderColor="White"
+                       Text="{Binding Phone}"/>
+            </Frame>
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Usuario"
+                       PlaceholderColor="White"
+                       Text="{Binding User}"/>
+            </Frame>
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Contraseña"
+                       PlaceholderColor="White"
+                       Text="{Binding Password}"/>
+            </Frame>
+        </StackLayout>
+        <Button Text="Registrarse"
+                Padding="12"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="#E3E3E3"
+                Command="{Binding SaveCommand}"
+                CornerRadius="40" />
+        <Button Text="Iniciar sesión"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                Command="{Binding ReturnCommand}"
+                HorizontalOptions="CenterAndExpand" />
+    </StackLayout>
+</ContentPage>

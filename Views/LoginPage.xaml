@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.Views.LoginPage">
+    <StackLayout Padding="20" Spacing="10">
+        <Image Source="user"
+               Margin="0,60"
+               WidthRequest="130"/>
+        <StackLayout Spacing="20">
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Usuario"
+                       PlaceholderColor="White"
+                       Text="{Binding User}"/>
+            </Frame>
+            <Frame Padding="15,5"
+                   BackgroundColor="#8D8D8D"
+                   CornerRadius="40">
+                <Entry Placeholder="Contraseña"
+                       PlaceholderColor="White"
+                       Text="{Binding Password}"/>
+            </Frame>
+        </StackLayout>
+        <Button Text="Ingresar"
+                Padding="12"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="#E3E3E3"
+                Command="{Binding LoginCommand}"
+                CornerRadius="40"/>
+        <Button Text="Registrarse"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                HorizontalOptions="CenterAndExpand"
+                Command="{Binding SiginCommand}"
+                Margin="0,0,0,50"/>
+    </StackLayout>
+</ContentPage>

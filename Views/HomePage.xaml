@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.Views.HomePage"
+             NavigationPage.HasNavigationBar="False"
+             Padding="10">
+    <Grid RowDefinitions="*">
+        <VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding Cuentas}"
+                            x:Name="lstAccounts">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="7"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem BackgroundColor="Blue"
+                                               Text="Editar"
+                                               IconImageSource="edit"
+                                               Invoked="SwipeItem_Invoked_Edit"/>
+                                    <SwipeItem Text="Eliminar"
+                                               BackgroundColor="Red"
+                                               IconImageSource="delete"
+                                               Invoked="SwipeItem_Invoked_Delete"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <Frame Padding="13"
+                                   BorderColor="{AppThemeBinding Dark=#474747, Light=#F2F4FF}"
+                                   BackgroundColor="{AppThemeBinding Dark=#474747, Light=#F2F4FF}">
+                                <StackLayout Spacing="7">
+                                    <HorizontalStackLayout Spacing="7">
+                                        <Label Text="&#xf2d2;"
+                                               VerticalOptions="Center"
+                                               FontFamily="FAS" />
+                                        <Label Text="{Binding SitioWeb}"
+                                               FontSize="16" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="7">
+                                        <Label Text="&#xf0ac;"
+                                               VerticalOptions="Center"
+                                               FontFamily="FAS" />
+                                        <Label Text="{Binding UrlSitio}"
+                                               FontSize="16" />
+                                    </HorizontalStackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
+                                                              CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
+                                                          CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="Aún no has registrado cuentas"
+                           TextColor="Gray"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </VerticalStackLayout>
+        <Button HorizontalOptions="End"
+                VerticalOptions="End"
+                Text="+"
+                Padding="0"
+                WidthRequest="70"
+                HeightRequest="70"
+                CornerRadius="35"
+                Command="{Binding RedirectAddCommand}"
+                FontSize="40"/>
+    </Grid>
+</ContentPage>

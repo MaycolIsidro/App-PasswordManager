@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopup:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="PasswordManager.Views.AddAccountPage"
+                 xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
+                 BackgroundColor="#80333333">
+    <Frame BackgroundColor="{AppThemeBinding Light=#DFE1EB,Dark=#353535}"
+           VerticalOptions="CenterAndExpand"
+           Margin="10"
+           BorderColor="Transparent"
+           Padding="10">
+        <VerticalStackLayout >
+            <Label Text="Aplicacion / Sitio Web" />
+            <Frame Padding="5,0"
+                   Margin="0,0,0,7">
+                <Entry Text="{Binding SitioWeb}"
+                       TextColor="Black" />
+            </Frame>
+            <Label Text="Url" />
+            <Frame Padding="5,0"
+                   Margin="0,0,0,7">
+                <Entry Text="{Binding Url}"
+                       TextColor="Black" />
+            </Frame>
+            <Label Text="Usuario" />
+            <Frame Padding="5,0"
+                   Margin="0,0,0,7">
+                <Entry Text="{Binding Usuario}"
+                       TextColor="Black" />
+            </Frame>
+            <Label Text="Contraseña" />
+            <Frame Padding="5,0"
+                   Margin="0,0,0,7">
+                <Entry Text="{Binding Password}"
+                       TextColor="Black" />
+            </Frame>
+            <Button Text="Guardar"
+                    Command="{Binding SaveCommand}"
+                    Margin="0,10,0,0" />
+        </VerticalStackLayout>
+    </Frame>
+</mopup:PopupPage>
