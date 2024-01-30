@@ -3,34 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.LoginPage">
     <StackLayout Padding="20" Spacing="10">
-        <Image Source="user"
+        <Image Source="{AppThemeBinding Dark=user, Light= user_dark}"
                Margin="0,60"
                WidthRequest="130"/>
         <StackLayout Spacing="20">
             <Frame Padding="15,5"
-                   BackgroundColor="#8D8D8D"
+                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
                    CornerRadius="40">
                 <Entry Placeholder="Usuario"
-                       PlaceholderColor="White"
+                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
                        Text="{Binding User}"/>
             </Frame>
             <Frame Padding="15,5"
-                   BackgroundColor="#8D8D8D"
+                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
                    CornerRadius="40">
                 <Entry Placeholder="Contraseña"
-                       PlaceholderColor="White"
+                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
                        Text="{Binding Password}"/>
             </Frame>
         </StackLayout>
         <Button Text="Ingresar"
                 Padding="12"
                 VerticalOptions="EndAndExpand"
-                BackgroundColor="#E3E3E3"
+                BackgroundColor="{AppThemeBinding Dark=#E3E3E3, Light=Silver}"
                 Command="{Binding LoginCommand}"
                 CornerRadius="40"/>
         <Button Text="Registrarse"
                 BackgroundColor="Transparent"
-                TextColor="White"
+                TextColor="{AppThemeBinding Dark=White, Light=Black}"
                 HorizontalOptions="CenterAndExpand"
                 Command="{Binding SiginCommand}"
                 Margin="0,0,0,50"/>
