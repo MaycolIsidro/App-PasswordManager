@@ -1,0 +1,1 @@
+Application PasswordManager - .NET MAUI
