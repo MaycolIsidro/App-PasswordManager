@@ -15,5 +15,11 @@ public partial class DetailsAccountPage
     {
         base.OnAppearing();
         vm.DesencriptPassword();
+        btnGuardar.IsVisible = false;
+    }
+
+    private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        btnGuardar.IsVisible = true;
     }
 }

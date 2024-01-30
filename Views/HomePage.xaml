@@ -17,10 +17,6 @@
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
-                                    <SwipeItem BackgroundColor="Blue"
-                                               Text="Editar"
-                                               IconImageSource="edit"
-                                               Invoked="SwipeItem_Invoked_Edit"/>
                                     <SwipeItem Text="Eliminar"
                                                BackgroundColor="Red"
                                                IconImageSource="delete"
