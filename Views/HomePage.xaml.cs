@@ -28,13 +28,6 @@ public partial class HomePage : ContentPage
 		await vm.GetCuentas();
     }
 
-    private async void SwipeItem_Invoked_Edit(object sender, EventArgs e)
-    {
-        SwipeItem item = (SwipeItem)sender;
-        Cuenta cuenta = (Cuenta)item.BindingContext;
-        await vm.RedirectEditAccount(cuenta);
-    }
-
     private async void SwipeItem_Invoked_Delete(object sender, EventArgs e)
     {
         SwipeItem item = (SwipeItem)sender;

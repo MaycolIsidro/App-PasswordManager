@@ -32,10 +32,6 @@ namespace PasswordManager.ViewModels
         {
             await MopupService.Instance.PushAsync(new AddAccountPage());
         }
-        public async Task RedirectEditAccount(Cuenta account)
-        {
-            await MopupService.Instance.PushAsync(new EditAccountPage(account));
-        }
         public async Task GetCuentas()
         {
             Cuentas = new ObservableCollection<Cuenta>(await db.GetAccounts());
