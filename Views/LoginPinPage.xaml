@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.Views.LoginPinPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="BtnNumbers">
+                <Setter Property="HeightRequest"
+                        Value="80"/>
+                <Setter Property="WidthRequest"
+                        Value="80" />
+                <Setter Property="CornerRadius"
+                        Value="40" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout Padding="10"
+                         Spacing="10">
+        <HorizontalStackLayout Spacing="30"
+                               HorizontalOptions="CenterAndExpand">
+            <Label Text="&#xf111;"
+                   FontFamily="FAS"
+                   FontSize="10"/>
+            <Label Text="&#xf111;"
+                   FontFamily="FAS"
+                   FontSize="10" />
+            <Label Text="&#xf111;"
+                   FontFamily="FAS"
+                   FontSize="10" />
+            <Label Text="&#xf111;"
+                   FontFamily="FAS"
+                   FontSize="10" />
+            <Label Text="&#xf111;"
+                   FontFamily="FAS"
+                   FontSize="10" />
+            <Label Text="&#xf111;"
+                   FontFamily="FAS"
+                   FontSize="10" />
+        </HorizontalStackLayout>
+        <Grid ColumnDefinitions="auto,auto,auto"
+              HorizontalOptions="Center"
+              ColumnSpacing="10"
+              RowSpacing="10"
+              Margin="25"
+              RowDefinitions="auto,auto,auto,auto">
+            <Button Text="1"
+                    Style="{StaticResource BtnNumbers}"/>
+            <Button Text="2"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Column="1"/>
+            <Button Text="3"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Column="2" />
+            <Button Text="4"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="1" />
+            <Button Text="5"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="1"
+                    Grid.Column="1" />
+            <Button Text="6"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="1"
+                    Grid.Column="2" />
+            <Button Text="7"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="2" />
+            <Button Text="8"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="2"
+                    Grid.Column="1" />
+            <Button Text="9"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="2"
+                    Grid.Column="2" />
+            <Button Text="0"
+                    Style="{StaticResource BtnNumbers}"
+                    Grid.Row="3"
+                    Grid.Column="1" />
+            <Button Text=""
+                    FontFamily="FAS"
+                    HeightRequest="50"
+                    Grid.Row="3"
+                    Grid.Column="2" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
