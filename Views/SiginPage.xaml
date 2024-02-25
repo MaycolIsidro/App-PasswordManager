@@ -6,7 +6,6 @@
     <StackLayout Padding="20"
                  Spacing="10">
         <Image Source="{AppThemeBinding Dark=user, Light= user_dark}"
-               Margin="0,40"
                WidthRequest="130" />
         <StackLayout Spacing="20">
             <Frame Padding="15,5"
@@ -43,6 +42,14 @@
                 <Entry Placeholder="Contraseña"
                        PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
                        Text="{Binding Password}"/>
+            </Frame>
+            <Frame Padding="15,5"
+                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+                   CornerRadius="40">
+                <Entry Placeholder="Pin"
+                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                       Text="{Binding ClavePin}"
+                       Keyboard="Numeric"/>
             </Frame>
         </StackLayout>
         <Button Text="Registrarse"

@@ -13,6 +13,7 @@ namespace PasswordManager.ViewModels
         public string Phone { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
+        public string ClavePin { get; set; }
 
         private readonly SQLiteHelper db;
         #endregion
@@ -41,6 +42,7 @@ namespace PasswordManager.ViewModels
                 Usuario = User,
                 Phone = Phone,
                 Password = password,
+                ClavePin = ClavePin
             };
             await db.Save(user);
             await Return();
