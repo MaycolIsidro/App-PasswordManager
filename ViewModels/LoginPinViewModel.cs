@@ -59,38 +59,32 @@ namespace PasswordManager.ViewModels
         public void WritePin(string value)
         {
             Pin += value;
-            EstablecerColoresValue();
-        }
-        private void EstablecerColoresValue()
-        {
-            for (int i = 0; i < ColorsValue.Count; i++)
-            {
-                ColorsValue[i] = Colors.White;
-            }
-            for (int i = 0; i < Pin.Length; i++)
-            {
-                ColorsValue[i] = Colors.Black;
-            }
+            ColorsValue[Pin.Length - 1] = Colors.Black;
             OnPropertyChanged(nameof(ColorsValue));
         }
         private void DeletePin()
         {
-            if (!string.IsNullOrEmpty(Pin))
+            if (Pin.Length > 0)
             {
-                string nuevoPin = Pin.Substring(0, Pin.Length - 1);
-                Pin = nuevoPin;
-                EstablecerColoresValue();
+                ColorsValue[Pin.Length - 1] = Colors.White;
+                Pin = Pin.Substring(0, Pin.Length - 1);
+                OnPropertyChanged(nameof(ColorsValue));
             }
         }
         private async void LoginUser()
         {
-            await Navigation.PushAsync(new HomePage());
+            App.Current.MainPage = new NavigationPage(new HomePage());
+        }
+        private void ReturnLoginPage()
+        {
+            App.Current.MainPage = new NavigationPage(new LoginPage());
         }
         #endregion
         #region COMANDOS
         public ICommand RedirectAddCommand => new Command(async () => await RedirectAddAccount());
         public ICommand WritePinCommand => new Command<string>(WritePin);
         public ICommand DeletePinCommand => new Command(DeletePin);
+        public ICommand ReturnLoginCommand => new Command(ReturnLoginPage);
         #endregion
     }
 }
