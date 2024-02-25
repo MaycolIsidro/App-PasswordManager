@@ -20,8 +20,14 @@
                    CornerRadius="40">
                 <Entry Placeholder="Contraseña"
                        PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding Password}"/>
+                       Text="{Binding Password}"
+                       IsPassword="True"/>
             </Frame>
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding RecordarSesion}"/>
+                <Label Text="Recordar sesión"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
         </StackLayout>
         <Button Text="Ingresar"
                 Padding="12"
