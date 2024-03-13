@@ -5,9 +5,10 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Button" x:Key="BtnNumbers">
+            <Style TargetType="Button"
+                   x:Key="BtnNumbers">
                 <Setter Property="HeightRequest"
-                        Value="80"/>
+                        Value="80" />
                 <Setter Property="WidthRequest"
                         Value="80" />
                 <Setter Property="CornerRadius"
@@ -17,109 +18,136 @@
                 <Setter Property="FontAttributes"
                         Value="Bold" />
             </Style>
+            <Style TargetType="Label"
+                   x:Key="LblCampo">
+                <Setter Property="Text"
+                        Value="&#xf111;" />
+                <Setter Property="FontFamily"
+                        Value="FAR" />
+                <Setter Property="FontSize"
+                        Value="16" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <VerticalStackLayout Padding="10"
-                         Spacing="10">
-        <HorizontalStackLayout Spacing="30"
-                               HorizontalOptions="CenterAndExpand">
-            <Label Text="&#xf111;"
-                   FontFamily="FAS"
-                   x:Name="LblValue1"
-                   TextColor="{Binding ColorsValue[0]}"
-                   FontSize="10"/>
-            <Label Text="&#xf111;"
-                   FontFamily="FAS"
-                   x:Name="LblValue2"
-                   TextColor="{Binding ColorsValue[1]}"
-                   FontSize="10" />
-            <Label Text="&#xf111;"
-                   FontFamily="FAS"
-                   x:Name="LblValue3"
-                   TextColor="{Binding ColorsValue[2]}"
-                   FontSize="10" />
-            <Label Text="&#xf111;"
-                   x:Name="LblValue4"
-                   FontFamily="FAS"
-                   TextColor="{Binding ColorsValue[3]}"
-                   FontSize="10" />
-            <Label Text="&#xf111;"
-                   x:Name="LblValue5"
-                   TextColor="{Binding ColorsValue[4]}"
-                   FontFamily="FAS"
-                   FontSize="10" />
-            <Label Text="&#xf111;"
-                   x:Name="LblValue6"
-                   TextColor="{Binding ColorsValue[5]}"
-                   FontFamily="FAS"
-                   FontSize="10" />
-        </HorizontalStackLayout>
-        <Grid ColumnDefinitions="auto,auto,auto"
-              HorizontalOptions="Center"
-              ColumnSpacing="10"
-              RowSpacing="10"
-              Margin="25"
-              RowDefinitions="auto,auto,auto,auto">
-            <Button Text="1"
-                    Style="{StaticResource BtnNumbers}"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="1"/>
-            <Button Text="2"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Column="1"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="2" />
-            <Button Text="3"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Column="2"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="3" />
-            <Button Text="4"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="1"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="4" />
-            <Button Text="5"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="5" />
-            <Button Text="6"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="6" />
-            <Button Text="7"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="2"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="7" />
-            <Button Text="8"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="8" />
-            <Button Text="9"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="9" />
-            <Button Text="0"
-                    Style="{StaticResource BtnNumbers}"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Command="{Binding WritePinCommand}"
-                    CommandParameter="0" />
-            <Button Text=""
-                    FontFamily="FAS"
-                    HeightRequest="50"
-                    Grid.Row="3"
-                    Command="{Binding DeletePinCommand}"
-                    Grid.Column="2" />
-        </Grid>
-    </VerticalStackLayout>
+    <StackLayout Padding="10"
+                 Spacing="10">
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <HorizontalStackLayout Spacing="30"
+                                   HorizontalOptions="CenterAndExpand">
+                <Label x:Name="LblValue1"
+                       Style="{StaticResource LblCampo}">
+                </Label>
+                <Label x:Name="LblValue2"
+                       Style="{StaticResource LblCampo}">
+                </Label>
+                <Label x:Name="LblValue3"
+                       Style="{StaticResource LblCampo}">
+                </Label>
+                <Label x:Name="LblValue4"
+                       Style="{StaticResource LblCampo}">
+                </Label>
+                <Label x:Name="LblValue5"
+                       Style="{StaticResource LblCampo}">
+                </Label>
+                <Label x:Name="LblValue6"
+                       Style="{StaticResource LblCampo}">
+                </Label>
+            </HorizontalStackLayout>
+            <Entry Text="{Binding Pin}"
+                   TextChanged="Entry_TextChanged"
+                   IsVisible="False" />
+            <Grid ColumnDefinitions="auto,auto,auto"
+                  HorizontalOptions="Center"
+                  ColumnSpacing="10"
+                  RowSpacing="10"
+                  Margin="25"
+                  RowDefinitions="auto,auto,auto,auto">
+                <Button Text="1"
+                        Style="{StaticResource BtnNumbers}"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="1" />
+                <Button Text="2"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Column="1"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="2" />
+                <Button Text="3"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Column="2"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="3" />
+                <Button Text="4"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="1"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="4" />
+                <Button Text="5"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="5" />
+                <Button Text="6"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="6" />
+                <Button Text="7"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="2"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="7" />
+                <Button Text="8"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="8" />
+                <Button Text="9"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="9" />
+                <Button Text="0"
+                        Style="{StaticResource BtnNumbers}"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Command="{Binding WritePinCommand}"
+                        CommandParameter="0" />
+                <Button Text="&#xf55a;"
+                        FontFamily="FAS"
+                        HeightRequest="50"
+                        Grid.Row="3"
+                        Padding="0"
+                        TextColor="Black"
+                        FontSize="40"
+                        BackgroundColor="Transparent"
+                        Command="{Binding DeletePinCommand}"
+                        Grid.Column="2" />
+            </Grid>
+            <Frame BackgroundColor="Red"
+                   Padding="10,5"
+                   HorizontalOptions="Center"
+                   BorderColor="Transparent">
+                <Label Text="{Binding Error}"
+                       TextColor="White"
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding Error}"
+                                 Value="">
+                        <Setter Property="IsVisible"
+                                Value="False"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+        </StackLayout>
+        <Button Text="Iniciar sesión con usuario y contraseña"
+                Margin="20"
+                Command="{Binding ReturnLoginCommand}" />
+    </StackLayout>
 </ContentPage>
