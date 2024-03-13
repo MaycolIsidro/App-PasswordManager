@@ -36,7 +36,7 @@ namespace PasswordManager.ViewModels
                 return;
             }
             Preferences.Set("RecordarSesion", RecordarSesion);
-            await Navigation.PushAsync(new HomePage());
+            App.Current.MainPage = new NavigationPage(new HomePage());
         }
         public async Task RedirectSigin()
         {
