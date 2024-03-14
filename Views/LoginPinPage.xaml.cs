@@ -7,8 +7,8 @@ public partial class LoginPinPage : ContentPage
 	public LoginPinPage()
 	{
 		InitializeComponent();
-		BindingContext = new LoginPinViewModel(Navigation);
 		Values = [LblValue1, LblValue2, LblValue3, LblValue4, LblValue5, LblValue6];
+		BindingContext = new LoginPinViewModel(Navigation);
 	}
 
     private void Entry_TextChanged(object sender, TextChangedEventArgs e)
