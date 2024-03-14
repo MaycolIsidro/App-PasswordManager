@@ -12,8 +12,8 @@ public partial class LoginPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-		bool sesionIniciada = Preferences.Get("RecordarSesion", false);
-        if (sesionIniciada)
+        bool RecordarSesion = Preferences.Get("RecordarSesion", false);
+        if (RecordarSesion)
         {
             App.Current.MainPage = new NavigationPage(new LoginPinPage());
         }

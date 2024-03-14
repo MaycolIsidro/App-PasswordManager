@@ -3,43 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.LoginPage"
              NavigationPage.HasNavigationBar="False">
-    <StackLayout Padding="20" Spacing="10">
-        <Image Source="{AppThemeBinding Dark=user, Light= user_dark}"
-               Margin="0,60"
+    <StackLayout Padding="20" Spacing="10"
+                 BackgroundColor="#F8F9F9">
+        <Image Source="padlock"
+               Margin="0,25,0,0"
                WidthRequest="130"/>
+        <Label Text="Bienvenido"
+               FontSize="30"
+               Margin="0,0,0,30"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"/>
         <StackLayout Spacing="20">
             <Frame Padding="15,5"
                    BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
                    CornerRadius="40">
-                <Entry Placeholder="Usuario"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding User}"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf007;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Usuario"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding User}"/>
+                </HorizontalStackLayout>
             </Frame>
             <Frame Padding="15,5"
                    BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
                    CornerRadius="40">
-                <Entry Placeholder="Contraseña"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding Password}"
-                       IsPassword="True"/>
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
+                    <Label Text="&#xf023;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Contraseña"
+                           HorizontalOptions="FillAndExpand"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding Password}"
+                           IsPassword="True" />
+                    <Label Text="&#xf06e;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                </StackLayout>
             </Frame>
-            <HorizontalStackLayout>
-                <CheckBox IsChecked="{Binding RecordarSesion}"/>
-                <Label Text="Recordar sesión"
-                       VerticalOptions="Center"/>
-            </HorizontalStackLayout>
+            <Button Text="¿Olvidaste la contraseña?"
+                    HorizontalOptions="End"
+                    MinimumHeightRequest="5"
+                    Padding="4"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray" />
         </StackLayout>
-        <Button Text="Ingresar"
+        <Button Text="INGRESAR"
                 Padding="12"
-                VerticalOptions="EndAndExpand"
-                BackgroundColor="{AppThemeBinding Dark=#E3E3E3, Light=Silver}"
+                Margin="0,20"
+                MinimumWidthRequest="190"
+                HorizontalOptions="Center"
                 Command="{Binding LoginCommand}"
                 CornerRadius="40"/>
-        <Button Text="Registrarse"
-                BackgroundColor="Transparent"
-                TextColor="{AppThemeBinding Dark=White, Light=Black}"
-                HorizontalOptions="CenterAndExpand"
-                Command="{Binding SiginCommand}"
-                Margin="0,0,0,50"/>
+        <HorizontalStackLayout Spacing="5"
+                               VerticalOptions="EndAndExpand"
+                               HorizontalOptions="Center">
+            <Label Text="¿No tienes una cuenta?"
+                   VerticalOptions="Center" />
+            <Button Text="Registrarse"
+                    MinimumHeightRequest="5"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource Primary}"
+                    Padding="5"
+                    Command="{Binding SiginCommand}" />
+        </HorizontalStackLayout>
     </StackLayout>
 </ContentPage>
