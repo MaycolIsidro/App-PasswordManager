@@ -27,16 +27,4 @@ public partial class HomePage : ContentPage
         base.OnAppearing();
 		await vm.GetCuentas();
     }
-
-    private async void SwipeItem_Invoked_Delete(object sender, EventArgs e)
-    {
-        SwipeItem item = (SwipeItem)sender;
-        Cuenta cuenta = (Cuenta)item.BindingContext;
-        bool question = await DisplayAlert("Aviso","¿Está seguro que desea eliminar el registro?","Sí","No");
-        if (question)
-        {
-            await vm.DeleteAccount(cuenta);
-            await vm.GetCuentas();
-        }
-    }
 }

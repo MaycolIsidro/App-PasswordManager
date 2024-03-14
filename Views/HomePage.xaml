@@ -2,50 +2,128 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.HomePage"
-             NavigationPage.HasNavigationBar="False"
-             Padding="10">
-    <Grid RowDefinitions="*">
-        <VerticalStackLayout>
+             NavigationPage.HasNavigationBar="False">
+    <Grid RowDefinitions="*"
+          Padding="15"
+          BackgroundColor="#F8F9F9">
+        <VerticalStackLayout Spacing="10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Hola, Maycol"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"/>
+                <Frame HorizontalOptions="EndAndExpand"
+                       BackgroundColor="{StaticResource Primary}"
+                       Padding="8"
+                       CornerRadius="40">
+                    <Label Text="MI"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                </Frame>
+            </StackLayout>
+            <Frame Padding="0"
+                   CornerRadius="15">
+                <SearchBar />
+            </Frame>
+            <Grid ColumnDefinitions="*,*,*"
+                  ColumnSpacing="10">
+                <Frame Padding="5,15">
+                    <VerticalStackLayout Spacing="10">
+                        <Frame Padding="8"
+                               BackgroundColor="#F5F5F5"
+                               HorizontalOptions="Center"
+                               CornerRadius="50">
+                            <Image Source="world"
+                                   HeightRequest="30" />
+                        </Frame>
+                        <Label Text="Redes Sociales"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Grid.Column="1"
+                       Padding="5,15">
+                    <VerticalStackLayout Spacing="10">
+                        <Frame Padding="8"
+                               BackgroundColor="#F5F5F5"
+                               HorizontalOptions="Center"
+                               CornerRadius="50">
+                            <Image Source="movil"
+                                   HeightRequest="30" />
+                        </Frame>
+                        <Label Text="Aplicaciones"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Grid.Column="2"
+                       Padding="5,15">
+                    <VerticalStackLayout Spacing="10">
+                        <Frame Padding="8"
+                               BackgroundColor="#F5F5F5"
+                               HorizontalOptions="Center"
+                               CornerRadius="50">
+                            <Image Source="wallet"
+                                   HeightRequest="30"/>
+                        </Frame>
+                        <Label Text="Tarjetas"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+            <Label Text="Recien usados"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   Margin="0,5"/>
             <CollectionView ItemsSource="{Binding Cuentas}"
                             x:Name="lstAccounts">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
-                                     VerticalItemSpacing="7"/>
+                                     VerticalItemSpacing="7" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <SwipeView>
-                            <SwipeView.LeftItems>
+                            <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <SwipeItem Text="Eliminar"
-                                               BackgroundColor="Red"
-                                               IconImageSource="delete"
-                                               Invoked="SwipeItem_Invoked_Delete"/>
+                                    <SwipeItemView Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
+                                                   CommandParameter="{Binding .}">
+                                        <Button BackgroundColor="#FF9090"
+                                                Margin="5"
+                                                Padding="10"
+                                                MinimumHeightRequest="5"
+                                                VerticalOptions="CenterAndExpand"
+                                                MinimumWidthRequest="5"
+                                                FontSize="20"
+                                                Text="&#xf2ed;"
+                                                FontFamily="FAR"
+                                                CornerRadius="50" />
+                                    </SwipeItemView>
                                 </SwipeItems>
-                            </SwipeView.LeftItems>
-                            <Frame Padding="13"
-                                   BorderColor="{AppThemeBinding Dark=#474747, Light=#F2F4FF}"
-                                   BackgroundColor="{AppThemeBinding Dark=#474747, Light=#F2F4FF}">
-                                <StackLayout Spacing="7">
-                                    <HorizontalStackLayout Spacing="7">
-                                        <Label Text="&#xf2d2;"
-                                               VerticalOptions="Center"
-                                               FontFamily="FAS" />
+                            </SwipeView.RightItems>
+                            <Frame Padding="10"
+                                   CornerRadius="15">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Frame Padding="10"
+                                           CornerRadius="15"
+                                           BackgroundColor="#EFEFEF">
+                                        <Image Source="facebook"
+                                               HeightRequest="30"/>
+                                    </Frame>
+                                    <VerticalStackLayout Spacing="2">
                                         <Label Text="{Binding SitioWeb}"
-                                               FontSize="16" />
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="7">
-                                        <Label Text="&#xf0ac;"
-                                               VerticalOptions="Center"
-                                               FontFamily="FAS" />
-                                        <Label Text="{Binding UrlSitio}"
-                                               FontSize="16" />
-                                    </HorizontalStackLayout>
-                                    <StackLayout.GestureRecognizers>
+                                               FontSize="17"
+                                               FontAttributes="Bold" />
+                                        <Label Text="usuario@gmail.com"
+                                               FontSize="15" />
+                                    </VerticalStackLayout>
+                                    <!--<StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
                                                               CommandParameter="{Binding .}" />
-                                    </StackLayout.GestureRecognizers>
-                                </StackLayout>
+                                    </StackLayout.GestureRecognizers>-->
+                                </HorizontalStackLayout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
                                                           CommandParameter="{Binding .}" />
@@ -56,9 +134,7 @@
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>
                     <Label Text="Aún no has registrado cuentas"
-                           TextColor="Gray"
-                           HorizontalOptions="CenterAndExpand"
-                           VerticalOptions="CenterAndExpand"/>
+                           HorizontalOptions="CenterAndExpand" />
                 </CollectionView.EmptyView>
             </CollectionView>
         </VerticalStackLayout>
@@ -66,10 +142,10 @@
                 VerticalOptions="End"
                 Text="+"
                 Padding="0"
-                WidthRequest="70"
-                HeightRequest="70"
+                WidthRequest="60"
+                HeightRequest="60"
                 CornerRadius="35"
                 Command="{Binding RedirectAddCommand}"
-                FontSize="40"/>
+                FontSize="45" />
     </Grid>
 </ContentPage>
