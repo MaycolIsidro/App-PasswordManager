@@ -17,6 +17,10 @@
                         Value="20" />
                 <Setter Property="FontAttributes"
                         Value="Bold" />
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource Primary}" />
             </Style>
             <Style TargetType="Label"
                    x:Key="LblCampo">
@@ -26,10 +30,13 @@
                         Value="FAR" />
                 <Setter Property="FontSize"
                         Value="16" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource Primary}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Padding="10"
+                 BackgroundColor="#F8F9F9"
                  Spacing="10">
         <StackLayout VerticalOptions="CenterAndExpand">
             <HorizontalStackLayout Spacing="30"
@@ -118,21 +125,20 @@
                         CommandParameter="0" />
                 <Button Text="&#xf55a;"
                         FontFamily="FAS"
-                        HeightRequest="50"
                         Grid.Row="3"
                         Padding="0"
-                        TextColor="Black"
-                        FontSize="40"
+                        TextColor="{StaticResource Primary}"
+                        FontSize="35"
                         BackgroundColor="Transparent"
                         Command="{Binding DeletePinCommand}"
                         Grid.Column="2" />
             </Grid>
-            <Frame BackgroundColor="Red"
+            <Frame BackgroundColor="#FFC8C8"
                    Padding="10,5"
                    HorizontalOptions="Center"
                    BorderColor="Transparent">
                 <Label Text="{Binding Error}"
-                       TextColor="White"
+                       TextColor="#FF3737"
                        FontSize="15"
                        FontAttributes="Bold"
                        HorizontalOptions="Center" />
@@ -146,8 +152,12 @@
                 </Frame.Triggers>
             </Frame>
         </StackLayout>
-        <Button Text="Iniciar sesión con usuario y contraseña"
+        <Button Text="Ingresar con contraseña"
                 Margin="20"
+                FontAttributes="Bold"
+                FontSize="17"
+                BackgroundColor="Transparent"
+                TextColor="{StaticResource Primary}"
                 Command="{Binding ReturnLoginCommand}" />
     </StackLayout>
 </ContentPage>
