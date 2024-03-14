@@ -16,6 +16,9 @@ public class SQLiteHelper
         await Database.CreateTableAsync<User>();
         await Database.CreateTableAsync<Cuenta>();
         await Database.CreateTableAsync<Categoria>();
+        await Database.InsertAsync(new Categoria() { CategoriaId = 1, Nombre = "Redes Sociales"});
+        await Database.InsertAsync(new Categoria() { CategoriaId = 2, Nombre = "Aplicaciones"});
+        await Database.InsertAsync(new Categoria() { CategoriaId = 3, Nombre = "Tarjetas"});
     }
     public async Task<int> Save<T>(T model)
     {
@@ -38,16 +41,21 @@ public class SQLiteHelper
         var user = await Database.Table<User>().FirstOrDefaultAsync(p => p.ClavePin == pin);
         return user;
     }
-    public async Task<List<Cuenta>> GetAccounts()
+    public async Task<List<Cuenta>> GetAccountsRecent()
     {
         await Init();
         return await Database.Table<Cuenta>().ToListAsync();
     }
-    //public async Task<int> GetNumberForAccounts()
-    //{
-    //    await Init();
-
-    //}
+    public async Task<List<Cuenta>> GetAccounts(int idCategoria)
+    {
+        await Init();
+        return await Database.Table<Cuenta>().Where(p => p.CategoriaId == idCategoria).ToListAsync();
+    }
+    public async Task<int> GetNumberForAccounts()
+    {
+        await Init();
+        return await Database.Table<Cuenta>().Where(p => p.CategoriaId == 1).CountAsync();
+    }
     public async Task<int> DeleteAccount(Cuenta account)
     {
         await Init();
