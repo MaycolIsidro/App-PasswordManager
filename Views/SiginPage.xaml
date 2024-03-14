@@ -4,63 +4,114 @@
              x:Class="PasswordManager.Views.SiginPage"
              NavigationPage.HasNavigationBar="False">
     <StackLayout Padding="20"
-                 Spacing="10">
-        <Image Source="{AppThemeBinding Dark=user, Light= user_dark}"
+                 BackgroundColor="#F8F9F9"
+                 Spacing="5">
+        <Image Source="padlock"
                WidthRequest="130" />
-        <StackLayout Spacing="20">
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+        <Label Text="Registrarse"
+               FontSize="30"
+               Margin="0,0,0,20"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center" />
+        <StackLayout Spacing="15">
+            <Frame Padding="20,5"
                    CornerRadius="40">
-                <Entry Placeholder="Nombres"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding Name}"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf007;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Nombres"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding Name}"
+                           x:Name="TxtNombres" />
+                </HorizontalStackLayout>
             </Frame>
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
-                <Entry Placeholder="Apellidos"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding Lastname}"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf007;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Apellidos"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding Lastname}"
+                           x:Name="TxtApellidos" />
+                </HorizontalStackLayout>
             </Frame>
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
-                <Entry Placeholder="Telefono"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding Phone}"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf095;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Telefono"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding Phone}"
+                           x:Name="TxtPhone" />
+                </HorizontalStackLayout>
             </Frame>
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
-                <Entry Placeholder="Usuario"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding User}"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf007;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Usuario"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding User}"
+                           x:Name="TxtUser" />
+                </HorizontalStackLayout>
             </Frame>
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
-                <Entry Placeholder="Contraseña"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding Password}"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf023;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Contraseña"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding Password}"
+                           IsPassword="True"
+                           x:Name="TxtPassword" />
+                </HorizontalStackLayout>
             </Frame>
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
-                <Entry Placeholder="Pin"
-                       PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
-                       Text="{Binding ClavePin}"
-                       Keyboard="Numeric"/>
+                <HorizontalStackLayout Spacing="7">
+                    <Label Text="&#xf084;"
+                           VerticalOptions="Center"
+                           TextColor="Silver"
+                           FontSize="16"
+                           FontFamily="FAS" />
+                    <Entry Placeholder="Pin"
+                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           Text="{Binding ClavePin}"
+                           Keyboard="Numeric"
+                           MaxLength="6"
+                           x:Name="TxtPin" />
+                </HorizontalStackLayout>
             </Frame>
         </StackLayout>
         <Button Text="Registrarse"
                 Padding="12"
-                VerticalOptions="EndAndExpand"
-                BackgroundColor="{AppThemeBinding Dark=#E3E3E3, Light=Silver}"
+                Margin="0,20"
+                MinimumWidthRequest="190"
+                HorizontalOptions="Center"
                 Command="{Binding SaveCommand}"
                 CornerRadius="40" />
         <Button Text="Iniciar sesión"
                 BackgroundColor="Transparent"
-                TextColor="{AppThemeBinding Dark=White, Light=Black}"
+                TextColor="{StaticResource Primary}"
                 Command="{Binding ReturnCommand}"
                 HorizontalOptions="CenterAndExpand" />
     </StackLayout>
