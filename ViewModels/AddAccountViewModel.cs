@@ -9,6 +9,7 @@ namespace PasswordManager.ViewModels
     public class AddAccountViewModel : BaseViewModel
     {
         #region VARIABLES
+        private int idCategoria;
         string _Password;
         public string SitioWeb { get; set; }
         public string Url { get; set; }
@@ -30,11 +31,20 @@ namespace PasswordManager.ViewModels
             get { return _Password; }
             set { SetValue(ref _Password, value); }
         }
+        public int IdCategoria
+        {
+            get { return idCategoria; }
+            set { SetValue(ref idCategoria, value); }
+        }
         #endregion
         #region PROCESOS
         private void GeneratePassword()
         {
             Password = encript.GeneratePassword();
+        }
+        private void SeleccionarCategoria(string idCategoria)
+        {
+            IdCategoria = int.Parse(idCategoria);
         }
         private async Task SaveAccount()
         {
@@ -72,6 +82,7 @@ namespace PasswordManager.ViewModels
         #endregion
         #region COMANDOS
         public ICommand GeneratePasswordCommand => new Command(GeneratePassword);
+        public ICommand SeleccionarCategoriaCommand => new Command<string>(SeleccionarCategoria);
         public ICommand SaveCommand => new Command(async () => await SaveAccount());
         #endregion
     }

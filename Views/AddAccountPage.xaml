@@ -1,42 +1,134 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mopup:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                 x:Class="PasswordManager.Views.AddAccountPage"
-                 xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
-                 BackgroundColor="#80333333">
-    <Frame BackgroundColor="{AppThemeBinding Light=#DFE1EB,Dark=#353535}"
-           VerticalOptions="CenterAndExpand"
-           Margin="10"
-           BorderColor="Transparent"
-           Padding="10">
-        <VerticalStackLayout >
-            <Label Text="Aplicacion / Sitio Web" />
-            <Frame Padding="5,0"
-                   Margin="0,0,0,7">
-                <Entry Text="{Binding SitioWeb}"
-                       TextColor="Black" />
-            </Frame>
-            <Label Text="Url" />
-            <Frame Padding="5,0"
-                   Margin="0,0,0,7">
-                <Entry Text="{Binding Url}"
-                       TextColor="Black" />
-            </Frame>
-            <Label Text="Usuario" />
-            <Frame Padding="5,0"
-                   Margin="0,0,0,7">
-                <Entry Text="{Binding Usuario}"
-                       TextColor="Black" />
-            </Frame>
-            <Label Text="Contraseña" />
-            <Frame Padding="5,0"
-                   Margin="0,0,0,7">
-                <Entry Text="{Binding Password}"
-                       TextColor="Black" />
-            </Frame>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.Views.AddAccountPage"
+             BackgroundColor="#F3F6FE"
+             Padding="10"
+             Title="Agregar cuenta">
+    <Frame Padding="15">
+        <VerticalStackLayout Spacing="10">
+            <StackLayout Spacing="5">
+                <Label Text="Tipo de cuenta" />
+                <Grid ColumnDefinitions="*,*,*"
+                      ColumnSpacing="10">
+                    <Frame Padding="5,15"
+                           BorderColor="#E9EFFF">
+                        <VerticalStackLayout>
+                            <Frame Padding="8"
+                                   BackgroundColor="#F5F5F5"
+                                   HorizontalOptions="Center"
+                                   CornerRadius="50">
+                                <Image Source="world"
+                                       HeightRequest="30" />
+                            </Frame>
+                            <Label Text="Red Social"
+                                   Margin="0,10,0,0"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}"
+                                                  CommandParameter="1" />
+                        </Frame.GestureRecognizers>
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame"
+                                         Binding="{Binding IdCategoria}"
+                                         Value="1">
+                                <Setter Property="BorderColor"
+                                        Value="{StaticResource Primary}"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                    <Frame Grid.Column="1"
+                           BorderColor="#E9EFFF"
+                           Padding="5,15">
+                        <VerticalStackLayout>
+                            <Frame Padding="8"
+                                   BackgroundColor="#F5F5F5"
+                                   HorizontalOptions="Center"
+                                   CornerRadius="50">
+                                <Image Source="movil"
+                                       HeightRequest="30" />
+                            </Frame>
+                            <Label Text="Aplicacion"
+                                   Margin="0,10,0,0"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}"
+                                                  CommandParameter="2" />
+                        </Frame.GestureRecognizers>
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame"
+                                         Binding="{Binding IdCategoria}"
+                                         Value="2">
+                                <Setter Property="BorderColor"
+                                        Value="{StaticResource Primary}" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                    <Frame Grid.Column="2"
+                           BorderColor="#E9EFFF"
+                           Padding="5,15">
+                        <VerticalStackLayout>
+                            <Frame Padding="8"
+                                   BackgroundColor="#F5F5F5"
+                                   HorizontalOptions="Center"
+                                   CornerRadius="50">
+                                <Image Source="wallet"
+                                       HeightRequest="30" />
+                            </Frame>
+                            <Label Text="Tarjeta"
+                                   Margin="0,10,0,0"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}"
+                                                  CommandParameter="3" />
+                        </Frame.GestureRecognizers>
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame"
+                                         Binding="{Binding IdCategoria}"
+                                         Value="3">
+                                <Setter Property="BorderColor"
+                                        Value="{StaticResource Primary}" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                </Grid>
+            </StackLayout>
+            <StackLayout Spacing="5">
+                <Label Text="Nombre" />
+                <Frame Padding="5,0"
+                       BorderColor="#E9EFFF">
+                    <Entry Text="{Binding SitioWeb}"
+                           TextColor="Black" />
+                </Frame>
+            </StackLayout>
+            <StackLayout Spacing="5">
+                <Label Text="Usuario" />
+                <Frame Padding="5,0"
+                       BorderColor="#E9EFFF">
+                    <Entry Text="{Binding Usuario}"
+                           TextColor="Black" />
+                </Frame>
+            </StackLayout>
+            <StackLayout Spacing="5">
+                <Label Text="Contraseña" />
+                <Frame Padding="5,0"
+                       BorderColor="#E9EFFF">
+                    <Entry Text="{Binding Password}"
+                           TextColor="Black" />
+                </Frame>
+            </StackLayout>
+            <Button Text="Generar contraseña"
+                    Command="{Binding SaveCommand}"
+                    Margin="0,10,0,0" />
             <Button Text="Guardar"
                     Command="{Binding SaveCommand}"
                     Margin="0,10,0,0" />
         </VerticalStackLayout>
     </Frame>
-</mopup:PopupPage>
+</ContentPage>
