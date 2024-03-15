@@ -5,11 +5,11 @@
              BackgroundColor="#F3F6FE"
              Padding="10"
              Title="Agregar cuenta">
-    <Frame Padding="15">
+    <Frame Padding="12">
         <VerticalStackLayout Spacing="10">
             <StackLayout Spacing="5">
                 <Label Text="Tipo de cuenta" />
-                <Grid ColumnDefinitions="*,*,*"
+                <Grid ColumnDefinitions="*,*"
                       ColumnSpacing="10">
                     <Frame Padding="5,15"
                            BorderColor="#E9EFFF">
@@ -35,7 +35,7 @@
                                          Binding="{Binding IdCategoria}"
                                          Value="1">
                                 <Setter Property="BorderColor"
-                                        Value="{StaticResource Primary}"/>
+                                        Value="{StaticResource Primary}" />
                             </DataTrigger>
                         </Frame.Triggers>
                     </Frame>
@@ -68,35 +68,6 @@
                             </DataTrigger>
                         </Frame.Triggers>
                     </Frame>
-                    <Frame Grid.Column="2"
-                           BorderColor="#E9EFFF"
-                           Padding="5,15">
-                        <VerticalStackLayout>
-                            <Frame Padding="8"
-                                   BackgroundColor="#F5F5F5"
-                                   HorizontalOptions="Center"
-                                   CornerRadius="50">
-                                <Image Source="wallet"
-                                       HeightRequest="30" />
-                            </Frame>
-                            <Label Text="Tarjeta"
-                                   Margin="0,10,0,0"
-                                   HorizontalOptions="Center"
-                                   FontAttributes="Bold" />
-                        </VerticalStackLayout>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SeleccionarCategoriaCommand}"
-                                                  CommandParameter="3" />
-                        </Frame.GestureRecognizers>
-                        <Frame.Triggers>
-                            <DataTrigger TargetType="Frame"
-                                         Binding="{Binding IdCategoria}"
-                                         Value="3">
-                                <Setter Property="BorderColor"
-                                        Value="{StaticResource Primary}" />
-                            </DataTrigger>
-                        </Frame.Triggers>
-                    </Frame>
                 </Grid>
             </StackLayout>
             <StackLayout Spacing="5">
@@ -117,15 +88,112 @@
             </StackLayout>
             <StackLayout Spacing="5">
                 <Label Text="Contraseña" />
-                <Frame Padding="5,0"
+                <Frame Padding="10"
                        BorderColor="#E9EFFF">
-                    <Entry Text="{Binding Password}"
-                           TextColor="Black" />
+                    <StackLayout Spacing="7">
+                        <Frame BorderColor="#E9EFFF"
+                               Padding="5,0">
+                            <Entry Text="{Binding Password}" />
+                        </Frame>
+                        <StackLayout Orientation="Horizontal"
+                                     Grid.ColumnSpan="2">
+                            <Label Text="Tamaño"
+                                   VerticalOptions="Center" />
+                            <Frame Padding="6,0"
+                                   CornerRadius="4"
+                                   HorizontalOptions="EndAndExpand"
+                                   BorderColor="#E9EFFF">
+                                <Grid ColumnDefinitions="auto,auto,auto"
+                                      ColumnSpacing="5">
+                                    <Button Text="&#xf068;"
+                                            FontFamily="FAS"
+                                            BackgroundColor="Transparent"
+                                            TextColor="Silver"
+                                            Padding="0"
+                                            FontSize="18"
+                                            MinimumHeightRequest="5"
+                                            VerticalOptions="Center"
+                                            MinimumWidthRequest="5" />
+                                    <Entry Grid.Column="1"
+                                           HorizontalTextAlignment="Center"
+                                           MinimumWidthRequest="25"
+                                           Text="{Binding LengthPassword}"/>
+                                    <Button Text="&#x2b;"
+                                            Grid.Column="2"
+                                            FontFamily="FAS"
+                                            BackgroundColor="Transparent"
+                                            TextColor="Silver"
+                                            Padding="0"
+                                            FontSize="18"
+                                            MinimumHeightRequest="5"
+                                            VerticalOptions="Center"
+                                            MinimumWidthRequest="5" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                        <Slider Value="{Binding LengthPassword}"
+                                Minimum="0"
+                                Maximum="20"/>
+                        <Grid ColumnDefinitions="*,*"
+                              ColumnSpacing="10"
+                              RowSpacing="10"
+                              RowDefinitions="auto,auto">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Números"
+                                       VerticalOptions="Center" />
+                                <CheckBox HorizontalOptions="EndAndExpand"
+                                          HeightRequest="23"
+                                          IsChecked="{Binding UseNumbers}"
+                                          WidthRequest="23" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                         Grid.Column="1">
+                                <Label Text="Símbolos"
+                                       VerticalOptions="Center" />
+                                <CheckBox HorizontalOptions="EndAndExpand"
+                                          HeightRequest="23"
+                                          IsChecked="{Binding UseSymbols}"
+                                          WidthRequest="23" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                         Grid.Row="1">
+                                <Label Text="Mayúsculas"
+                                       VerticalOptions="Center" />
+                                <CheckBox HorizontalOptions="EndAndExpand"
+                                          HeightRequest="23"
+                                          IsChecked="{Binding UseUppers}"
+                                          WidthRequest="23" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                         Grid.Column="1"
+                                         Grid.Row="1">
+                                <Label Text="Minúsculas"
+                                       VerticalOptions="Center" />
+                                <CheckBox HorizontalOptions="EndAndExpand"
+                                          HeightRequest="23"
+                                          IsChecked="{Binding UseLowers}"
+                                          WidthRequest="23" />
+                            </StackLayout>
+                        </Grid>
+                        <Button Text="Generar contraseña"
+                                FontAttributes="Bold"
+                                Command="{Binding GeneratePasswordCommand}"
+                                BackgroundColor="Transparent"
+                                Padding="0"
+                                MinimumHeightRequest="30"
+                                TextColor="{StaticResource Primary}" />
+                        <Label Text="o"
+                               HorizontalOptions="Center"/>
+                        <Button Text="Usar contraseña manual"
+                                FontAttributes="Bold"
+                                Padding="0"
+                                MinimumHeightRequest="30"
+                                Command="{Binding GeneratePasswordCommand}"
+                                BackgroundColor="Transparent"
+                                TextColor="{StaticResource Primary}" />
+                    </StackLayout>
                 </Frame>
             </StackLayout>
-            <Button Text="Generar contraseña"
-                    Command="{Binding SaveCommand}"
-                    Margin="0,10,0,0" />
             <Button Text="Guardar"
                     Command="{Binding SaveCommand}"
                     Margin="0,10,0,0" />
