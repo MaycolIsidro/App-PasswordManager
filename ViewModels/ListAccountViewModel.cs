@@ -1,5 +1,6 @@
 ﻿using PasswordManager.Data;
 using PasswordManager.Models;
+using PasswordManager.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -9,7 +10,7 @@ public class ListAccountViewModel : BaseViewModel
     #region VARIABLES
     private string title;
     private string textSearch;
-    private readonly int idCategoria;
+    private int idCategoria;
     readonly SQLiteHelper db = new ();
     public ObservableCollection<Cuenta> ListAccounts { get; set; }
     #endregion
@@ -39,6 +40,10 @@ public class ListAccountViewModel : BaseViewModel
     public async Task GetAccounts()
     {
         ListAccounts = new ObservableCollection<Cuenta>(await db.GetAccounts(idCategoria));
+    }
+    private async Task RedirectAddAccount()
+    {
+        await Navigation.PushAsync(new AddAccountPage(idCategoria));
     }
     #endregion
     #region COMANDOS

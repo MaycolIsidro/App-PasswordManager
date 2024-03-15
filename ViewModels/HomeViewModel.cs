@@ -29,11 +29,11 @@ public class HomeViewModel : BaseViewModel
     #region PROCESOS
     public async Task RedirectAddAccount()
     {
-        await MopupService.Instance.PushAsync(new AddAccountPage());
+        await Navigation.PushAsync(new AddAccountPage(0));
     }
     public async Task GetCuentas()
     {
-        Cuentas = new ObservableCollection<Cuenta>(await db.GetAccounts());
+        Cuentas = new ObservableCollection<Cuenta>(await db.GetAccountsRecent());
     }
     public async Task ShowDetails(Cuenta account)
     {
@@ -47,10 +47,20 @@ public class HomeViewModel : BaseViewModel
             await db.DeleteAccount(account);
         }
     }
+    private async void CopyToClipboard(Cuenta cuenta)
+    {
+        await Clipboard.Default.SetTextAsync(cuenta.Password);
+    }
+    private async Task RedirectionToListAccounts(string idCategoria)
+    {
+        await Navigation.PushAsync(new ListAccountsPage(int.Parse(idCategoria)));
+    }
     #endregion
     #region COMANDOS
     public ICommand RedirectAddCommand => new Command(async () => await RedirectAddAccount());
     public ICommand ShowDetailsCommand => new Command<Cuenta>(async (p) => await ShowDetails(p));
     public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
+    public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
+    public ICommand RedirectListAccountsCommand => new Command<string>(async (p) => await RedirectionToListAccounts(p));
     #endregion
 }

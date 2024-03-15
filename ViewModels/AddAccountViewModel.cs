@@ -15,14 +15,13 @@ namespace PasswordManager.ViewModels
         public string Url { get; set; }
         public string Usuario { get; set; }
         private List<string> Errors { get; set; }
-        readonly TextEncript encript;
-        readonly SQLiteHelper db;
+        readonly TextEncript encript = new();
+        readonly SQLiteHelper db = new();
         #endregion
         #region CONSTRUCTOR
-        public AddAccountViewModel()
+        public AddAccountViewModel(int idCategoria)
         {
-            encript = new TextEncript();
-            db = new SQLiteHelper();
+            IdCategoria = idCategoria;
         }
         #endregion
         #region OBJETOS
@@ -74,7 +73,7 @@ namespace PasswordManager.ViewModels
         }
         private void ValidateForm()
         {
-            Errors ??= new List<string>();
+            Errors ??= [];
             if (string.IsNullOrEmpty(SitioWeb)) Errors.Add("Debe ingresar el nombre de la aplicación o sitio web");
             else if (string.IsNullOrEmpty(Usuario)) Errors.Add("Debe ingresar un usuario");
             else if (string.IsNullOrEmpty(Password)) Errors.Add("Debe ingresar una contraseña");

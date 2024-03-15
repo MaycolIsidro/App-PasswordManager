@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.ListAccountsPage"
              Title="{Binding Title}">
-    <VerticalStackLayout Padding="15"
-                         BackgroundColor="#F3F6FE">
+    <StackLayout Padding="15"
+                 BackgroundColor="#F3F6FE">
         <Frame Padding="0"
                CornerRadius="15">
-            <SearchBar Placeholder="Buscar cuentas"/>
+            <SearchBar Placeholder="Buscar cuentas" />
         </Frame>
-    </VerticalStackLayout>
+        <Grid RowDefinitions="*"
+              VerticalOptions="FillAndExpand">
+            <Button Style="{StaticResource BtnFloating}"
+                    Command="{Binding RedirectAddCommand}"/>
+        </Grid>
+    </StackLayout>
 </ContentPage>
