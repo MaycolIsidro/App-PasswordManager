@@ -1,12 +1,11 @@
-﻿namespace PasswordManager.Helpers
+﻿namespace PasswordManager.Helpers;
+public class TextEncript
 {
-    public class TextEncript
+    private readonly Dictionary<char, string> ValuesEncript;
+    private readonly Dictionary<string, char> ValuesText;
+    public TextEncript()
     {
-        private readonly Dictionary<char, string> ValuesEncript;
-        private readonly Dictionary<string, char> ValuesText;
-        public TextEncript()
-        {
-            ValuesEncript = new Dictionary<char, string>()
+        ValuesEncript = new Dictionary<char, string>()
             {
                 { 'a', "{]5.y=9" },
                 { 'b', "Gdf+h8*" },
@@ -102,7 +101,7 @@
                 { '>', "4$%.--H" },
                 { ';', "<=)/gh5" },
             };
-            ValuesText = new Dictionary<string, char>()
+        ValuesText = new Dictionary<string, char>()
             {
                 { "{]5.y=9", 'a' },
                 { "Gdf+h8*", 'b' },
@@ -198,47 +197,58 @@
                 { "4$%.--H", '>' },
                 { "<=)/gh5", ';' },
             };
-        }
-        public string EncriptPassword(string password)
+    }
+    public string EncriptPassword(string password)
+    {
+        string passwordEncript = "";
+        foreach (var item in password)
         {
-            string passwordEncript = "";
-            foreach (var item in password)
-            {
-                ValuesEncript.TryGetValue(item, out var value);
-                value ??= "k7G.{#%";
-                passwordEncript += value;
-            }
-            return passwordEncript;
+            ValuesEncript.TryGetValue(item, out var value);
+            value ??= "k7G.{#%";
+            passwordEncript += value;
         }
-        public string DesencriptPassword(string passwordEncript)
+        return passwordEncript;
+    }
+    public string DesencriptPassword(string passwordEncript)
+    {
+        string password = "";
+        for (int i = 0; i < passwordEncript.Length; i += 7)
         {
-            string password = "";
-            for (int i = 0; i < passwordEncript.Length; i += 7)
-            {
-                ValuesText.TryGetValue(passwordEncript.Substring(i,7), out var value);
-                password += value;
-            }
-            return password;
+            ValuesText.TryGetValue(passwordEncript.Substring(i, 7), out var value);
+            password += value;
         }
-        public string GeneratePassword()
+        return password;
+    }
+    public static string GeneratePassword(int length, bool useNumbers, bool useSymbols, bool useUppers, bool useLowers)
+    {
+        string numbers = "0123456789";
+        string lowers = "abcdefghijklmnopqrstuvwxyz";
+        string uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string symbols = ".-,@/*+<>_;:{}[]?=#&%()|°";
+        List<string> valuesUse = [];
+        if (useNumbers) valuesUse.Add(numbers);
+        if (useSymbols) valuesUse.Add(symbols);
+        if (useLowers) valuesUse.Add(lowers);
+        if (useUppers) valuesUse.Add(uppers);
+        Random random = new();
+        string password = "";
+        for (int i = 0; i < length; i++)
         {
-            Random random = new Random();
-            string numbers = "0123456789";
-            string letters = "abcdefghijklmnopqrstuvwxyz";
-            string lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string specials = ".-,@/*+<>_;:{}[]?=#&%()|°";
-            string password = "";
-            for (int i = 0; i < 4; i++)
+            if (password.Length >= length) break;
+            if (length - password.Length >= valuesUse.Count)
             {
-                int index = random.Next(0, 10);
-                password += numbers[index];
-                index = random.Next(0, 26);
-                password += letters[index];
-                password += lettersUpper[index];
-                index = random.Next(0, 25);
-                password += specials[index];
+                foreach (var item in valuesUse)
+                {
+                    int x = random.Next(0, item.Length);
+                    password += item[x];
+                }
             }
-            return password;
+            if (password.Length >= length) break;
+            var numberRandom = random.Next(0, valuesUse.Count);
+            var list = valuesUse[numberRandom];
+            int index = random.Next(0, list.Length);
+            password += list[index];
         }
+        return password;
     }
 }
