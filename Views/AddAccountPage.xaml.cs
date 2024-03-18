@@ -4,14 +4,16 @@ namespace PasswordManager.Views;
 public partial class AddAccountPage
 {
 	bool usePasswordGenerator;
-	public AddAccountPage(int idCategoria)
+	readonly AddAccountViewModel viewModel;
+    public AddAccountPage(int idCategoria)
 	{
 		InitializeComponent();
-		BindingContext = new AddAccountViewModel(idCategoria);
+		BindingContext = viewModel = new AddAccountViewModel(idCategoria);
 	}
 
     private void Button_Clicked(object sender, EventArgs e)
     {
+		viewModel.Password = "";
 		usePasswordGenerator = !usePasswordGenerator;
 		BtnUsePasswordGenerator.IsVisible = !usePasswordGenerator;
 		StckPasswordGenerator.IsVisible = usePasswordGenerator;

@@ -124,7 +124,8 @@
                                                         FontSize="18"
                                                         MinimumHeightRequest="5"
                                                         VerticalOptions="Center"
-                                                        MinimumWidthRequest="5" />
+                                                        MinimumWidthRequest="5"
+                                                        Command="{Binding DecreasePasswordLengthCommand}"/>
                                                 <Entry Grid.Column="1"
                                                        HorizontalTextAlignment="Center"
                                                        MinimumWidthRequest="25"
@@ -138,7 +139,8 @@
                                                         FontSize="18"
                                                         MinimumHeightRequest="5"
                                                         VerticalOptions="Center"
-                                                        MinimumWidthRequest="5" />
+                                                        MinimumWidthRequest="5"
+                                                        Command="{Binding AddPasswordLengthCommand}"/>
                                             </Grid>
                                         </Frame>
                                     </StackLayout>
