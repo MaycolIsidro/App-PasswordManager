@@ -11,7 +11,7 @@
                 <Label Text="Hola, Maycol"
                        FontSize="16"
                        VerticalOptions="Center"
-                       FontAttributes="Bold"/>
+                       FontAttributes="Bold" />
                 <Frame HorizontalOptions="EndAndExpand"
                        BackgroundColor="{StaticResource Primary}"
                        Padding="8"
@@ -19,32 +19,39 @@
                     <Label Text="MI"
                            FontSize="16"
                            FontAttributes="Bold"
-                           TextColor="White"/>
+                           TextColor="White" />
                 </Frame>
             </StackLayout>
             <Frame Padding="0"
                    CornerRadius="15">
                 <SearchBar />
             </Frame>
-            <Grid ColumnDefinitions="*,*,*"
+            <Grid ColumnDefinitions="*,*"
                   ColumnSpacing="10">
                 <Frame Padding="5,15">
-                    <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout>
                         <Frame Padding="8"
                                BackgroundColor="#F5F5F5"
                                HorizontalOptions="Center"
                                CornerRadius="50">
-                            <Image Source="world"
+                            <Image Source="web"
                                    HeightRequest="30" />
                         </Frame>
-                        <Label Text="Redes Sociales"
+                        <Label Text="Sitios Web"
+                               Margin="0,10,0,0"
                                HorizontalOptions="Center"
                                FontAttributes="Bold" />
+                        <Label Text="30 cuentas"
+                               HorizontalOptions="Center" />
                     </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RedirectListAccountsCommand}"
+                                              CommandParameter="1"/>
+                    </Frame.GestureRecognizers>
                 </Frame>
                 <Frame Grid.Column="1"
                        Padding="5,15">
-                    <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout>
                         <Frame Padding="8"
                                BackgroundColor="#F5F5F5"
                                HorizontalOptions="Center"
@@ -53,30 +60,22 @@
                                    HeightRequest="30" />
                         </Frame>
                         <Label Text="Aplicaciones"
+                               Margin="0,10,0,0"
                                HorizontalOptions="Center"
                                FontAttributes="Bold" />
+                        <Label Text="30 cuentas"
+                               HorizontalOptions="Center" />
                     </VerticalStackLayout>
-                </Frame>
-                <Frame Grid.Column="2"
-                       Padding="5,15">
-                    <VerticalStackLayout Spacing="10">
-                        <Frame Padding="8"
-                               BackgroundColor="#F5F5F5"
-                               HorizontalOptions="Center"
-                               CornerRadius="50">
-                            <Image Source="wallet"
-                                   HeightRequest="30"/>
-                        </Frame>
-                        <Label Text="Tarjetas"
-                               HorizontalOptions="Center"
-                               FontAttributes="Bold"/>
-                    </VerticalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RedirectListAccountsCommand}"
+                                              CommandParameter="2" />
+                    </Frame.GestureRecognizers>
                 </Frame>
             </Grid>
             <Label Text="Recien usados"
                    FontSize="16"
                    FontAttributes="Bold"
-                   Margin="0,5"/>
+                   Margin="0,5" />
             <CollectionView ItemsSource="{Binding Cuentas}"
                             x:Name="lstAccounts">
                 <CollectionView.ItemsLayout>
@@ -105,25 +104,39 @@
                             </SwipeView.RightItems>
                             <Frame Padding="10"
                                    CornerRadius="15">
-                                <HorizontalStackLayout Spacing="10">
+                                <StackLayout Spacing="10"
+                                             Orientation="Horizontal">
                                     <Frame Padding="10"
                                            CornerRadius="15"
                                            BackgroundColor="#EFEFEF">
                                         <Image Source="facebook"
-                                               HeightRequest="30"/>
+                                               HeightRequest="30" />
                                     </Frame>
-                                    <VerticalStackLayout Spacing="2">
+                                    <StackLayout Spacing="2"
+                                                 HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding SitioWeb}"
                                                FontSize="17"
                                                FontAttributes="Bold" />
                                         <Label Text="usuario@gmail.com"
                                                FontSize="15" />
-                                    </VerticalStackLayout>
+                                    </StackLayout>
+                                    <Button Text="&#xf0c5;"
+                                            Padding="5"
+                                            TextColor="Black"
+                                            BackgroundColor="Transparent"
+                                            MinimumHeightRequest="5"
+                                            MinimumWidthRequest="5"
+                                            FontSize="17"
+                                            VerticalOptions="Center"
+                                            Margin="0,0,5,0"
+                                            FontFamily="FAR"
+                                            Command="{Binding Path=BindingContext.CopyToClipboardCommand, Source={x:Reference lstAccounts}}"
+                                            CommandParameter="{Binding .}"/>
                                     <!--<StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
                                                               CommandParameter="{Binding .}" />
                                     </StackLayout.GestureRecognizers>-->
-                                </HorizontalStackLayout>
+                                </StackLayout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
                                                           CommandParameter="{Binding .}" />
@@ -138,14 +151,7 @@
                 </CollectionView.EmptyView>
             </CollectionView>
         </VerticalStackLayout>
-        <Button HorizontalOptions="End"
-                VerticalOptions="End"
-                Text="+"
-                Padding="0"
-                WidthRequest="60"
-                HeightRequest="60"
-                CornerRadius="35"
-                Command="{Binding RedirectAddCommand}"
-                FontSize="45" />
+        <Button Style="{StaticResource BtnFloating}"
+                Command="{Binding RedirectAddCommand}" />
     </Grid>
 </ContentPage>

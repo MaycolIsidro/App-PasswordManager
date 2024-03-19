@@ -16,9 +16,8 @@ public class SQLiteHelper
         await Database.CreateTableAsync<User>();
         await Database.CreateTableAsync<Cuenta>();
         await Database.CreateTableAsync<Categoria>();
-        await Database.InsertAsync(new Categoria() { CategoriaId = 1, Nombre = "Redes Sociales"});
+        await Database.InsertAsync(new Categoria() { CategoriaId = 1, Nombre = "Sitios Web"});
         await Database.InsertAsync(new Categoria() { CategoriaId = 2, Nombre = "Aplicaciones"});
-        await Database.InsertAsync(new Categoria() { CategoriaId = 3, Nombre = "Tarjetas"});
     }
     public async Task<int> Save<T>(T model)
     {
