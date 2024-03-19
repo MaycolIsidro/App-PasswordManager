@@ -56,13 +56,20 @@ public class ListAccountViewModel : BaseViewModel
     }
     private async void CopyToClipboard(Cuenta cuenta)
     {
+        await UpdateDateAccess(cuenta);
         await Clipboard.Default.SetTextAsync(textEncript.DesencriptPassword(cuenta.Password));
     }
-    private void ShowPassword(Cuenta cuenta)
+    private async void ShowPassword(Cuenta cuenta)
     {
+        await UpdateDateAccess(cuenta);
         cuenta.ShowPassword = !cuenta.ShowPassword;
         if (cuenta.ShowPassword) cuenta.PasswordView = textEncript.DesencriptPassword(cuenta.Password);
         else cuenta.PasswordView = cuenta.Password;
+    }
+    private async Task UpdateDateAccess(Cuenta cuenta)
+    {
+        cuenta.UltimoAcceso = DateTime.Now;
+        await db.UpdateAccount(cuenta);
     }
     #endregion
     #region COMANDOS
