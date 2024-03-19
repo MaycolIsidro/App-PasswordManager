@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.AddAccountPage"
+             xmlns:behaviors="clr-namespace:PasswordManager.Views.Behaviors"
              Title="Agregar cuenta">
     <ScrollView>
         <StackLayout Padding="10"
@@ -76,7 +77,11 @@
                         <Frame Padding="5,0"
                                BorderColor="#E9EFFF">
                             <Entry Text="{Binding SitioWeb}"
-                                   TextColor="Black" />
+                                   TextColor="Black">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryValidator />
+                                </Entry.Behaviors>
+                            </Entry>
                         </Frame>
                     </StackLayout>
                     <StackLayout Spacing="5">
@@ -84,7 +89,11 @@
                         <Frame Padding="5,0"
                                BorderColor="#E9EFFF">
                             <Entry Text="{Binding Usuario}"
-                                   TextColor="Black" />
+                                   TextColor="Black">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryValidator />
+                                </Entry.Behaviors>
+                            </Entry>
                         </Frame>
                     </StackLayout>
                     <StackLayout Spacing="5">
@@ -94,7 +103,25 @@
                             <StackLayout Spacing="9">
                                 <Frame BorderColor="#E9EFFF"
                                        Padding="5,0">
-                                    <Entry Text="{Binding Password}" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Entry Text="{Binding Password}"
+                                               HorizontalOptions="FillAndExpand">
+                                            <Entry.Behaviors>
+                                                <behaviors:EntryValidator />
+                                            </Entry.Behaviors>
+                                        </Entry>
+                                        <Button Text="&#xf0c5;"
+                                                Padding="5"
+                                                TextColor="Gray"
+                                                BackgroundColor="Transparent"
+                                                MinimumHeightRequest="5"
+                                                MinimumWidthRequest="5"
+                                                FontSize="17"
+                                                VerticalOptions="Center"
+                                                Margin="0,0,5,0"
+                                                FontFamily="FAR"
+                                                Command="{Binding CopyToClipboardCommand}" />
+                                    </StackLayout>
                                 </Frame>
                                 <Button Text="Usar generador de contraseña"
                                         FontAttributes="Bold"
@@ -125,7 +152,7 @@
                                                         MinimumHeightRequest="5"
                                                         VerticalOptions="Center"
                                                         MinimumWidthRequest="5"
-                                                        Command="{Binding DecreasePasswordLengthCommand}"/>
+                                                        Command="{Binding DecreasePasswordLengthCommand}" />
                                                 <Entry Grid.Column="1"
                                                        HorizontalTextAlignment="Center"
                                                        MinimumWidthRequest="25"
@@ -140,7 +167,7 @@
                                                         MinimumHeightRequest="5"
                                                         VerticalOptions="Center"
                                                         MinimumWidthRequest="5"
-                                                        Command="{Binding AddPasswordLengthCommand}"/>
+                                                        Command="{Binding AddPasswordLengthCommand}" />
                                             </Grid>
                                         </Frame>
                                     </StackLayout>
@@ -188,6 +215,25 @@
                                                       WidthRequest="23" />
                                         </StackLayout>
                                     </Grid>
+                                    <Frame BackgroundColor="#FFC8C8"
+                                           Padding="10,5"
+                                           Margin="0,7,0,0"
+                                           HorizontalOptions="Center"
+                                           BorderColor="Transparent">
+                                        <Label Text="{Binding ErrorPasswordGenerator}"
+                                               TextColor="#FF3737"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Center" />
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame"
+                                                         Binding="{Binding ErrorPasswordGenerator}"
+                                                         Value="">
+                                                <Setter Property="IsVisible"
+                                                        Value="False" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                    </Frame>
                                     <Button Text="Generar contraseña"
                                             FontAttributes="Bold"
                                             Command="{Binding GeneratePasswordCommand}"
@@ -195,7 +241,7 @@
                                             CornerRadius="15"
                                             Margin="0,10,0,0"
                                             MinimumHeightRequest="25"
-                                            HorizontalOptions="Center"/>
+                                            HorizontalOptions="Center" />
                                     <Label Text="o"
                                            FontSize="16"
                                            HorizontalOptions="Center" />
@@ -207,12 +253,12 @@
                                             BackgroundColor="Transparent"
                                             TextColor="{StaticResource Primary}" />
                                 </StackLayout>
-
                             </StackLayout>
                         </Frame>
                     </StackLayout>
                     <Button Text="Guardar"
-                            Command="{Binding SaveCommand}"
+                            x:Name="BtnGuardar"
+                            Clicked="BtnGuardar_Clicked"
                             Margin="0,10,0,0" />
                 </VerticalStackLayout>
             </Frame>

@@ -10,15 +10,14 @@ public class AddAccountViewModel : BaseViewModel
     #region VARIABLES
     private int lengthPassword = 16;
     private int idCategoria;
+    private string errorPasswordGenerator = "";
     string _Password;
     public string SitioWeb { get; set; }
-    public string Url { get; set; }
     public string Usuario { get; set; }
     public bool UseNumbers { get; set; } = true;
     public bool UseSymbols { get; set; } = true;
     public bool UseUppers { get; set; } = true;
     public bool UseLowers { get; set; } = true;
-    private List<string> Errors { get; set; }
     readonly TextEncript encript = new();
     readonly SQLiteHelper db = new();
     #endregion
@@ -44,48 +43,50 @@ public class AddAccountViewModel : BaseViewModel
         get { return lengthPassword; }
         set { SetValue(ref lengthPassword, value); }
     }
+    public string ErrorPasswordGenerator
+    {
+        get { return errorPasswordGenerator; }
+        set { SetValue(ref errorPasswordGenerator, value); }
+    }
     #endregion
     #region PROCESOS
     private void GeneratePassword()
     {
-        Password = TextEncript.GeneratePassword(LengthPassword, UseNumbers, UseSymbols, UseUppers, UseLowers);
+        Password = "";
+        ErrorPasswordGenerator = "";
+        try
+        {
+            Password = TextEncript.GeneratePassword(LengthPassword, UseNumbers, UseSymbols, UseUppers, UseLowers);
+        }
+        catch (Exception ex)
+        {
+            ErrorPasswordGenerator = ex.Message;
+        }
     }
     private void SeleccionarCategoria(string idCategoria)
     {
         IdCategoria = int.Parse(idCategoria);
     }
-    private async Task SaveAccount()
+    public async Task SaveAccount()
     {
         try
         {
-            ValidateForm();
-            if (Errors.Count > 0)
-            {
-                await DisplayAlert("Error", Errors[0], "Ok");
-                return;
-            }
             var password = encript.EncriptPassword(Password);
             Cuenta account = new()
             {
-                SitioWeb = SitioWeb,
-                UrlSitio = Url,
+                Nombre = SitioWeb,
+                UltimoAcceso = DateTime.Now,
                 Usuario = Usuario,
-                Password = password
+                Password = password,
+                CategoriaId = IdCategoria
             };
             await db.Save(account);
-            await MopupService.Instance.PopAsync();
+            await Navigation.PopAsync();
         }
         catch (Exception)
         {
             await DisplayAlert("Aviso", "No se pudo registrar la cuenta", "Ok");
         }
-    }
-    private void ValidateForm()
-    {
-        Errors ??= [];
-        if (string.IsNullOrEmpty(SitioWeb)) Errors.Add("Debe ingresar el nombre de la aplicación o sitio web");
-        else if (string.IsNullOrEmpty(Usuario)) Errors.Add("Debe ingresar un usuario");
-        else if (string.IsNullOrEmpty(Password)) Errors.Add("Debe ingresar una contraseña");
     }
     private void AddPasswordLength()
     {
@@ -95,6 +96,10 @@ public class AddAccountViewModel : BaseViewModel
     {
         if (LengthPassword > 0) LengthPassword--;
     }
+    private async void CopyToClipboard()
+    {
+        await Clipboard.Default.SetTextAsync(Password);
+    }
     #endregion
     #region COMANDOS
     public ICommand GeneratePasswordCommand => new Command(GeneratePassword);
@@ -102,5 +107,6 @@ public class AddAccountViewModel : BaseViewModel
     public ICommand DecreasePasswordLengthCommand => new Command(DecreasePasswordLength);
     public ICommand SeleccionarCategoriaCommand => new Command<string>(SeleccionarCategoria);
     public ICommand SaveCommand => new Command(async () => await SaveAccount());
+    public ICommand CopyToClipboardCommand => new Command(CopyToClipboard);
     #endregion
 }

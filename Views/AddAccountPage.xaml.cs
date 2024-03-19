@@ -18,4 +18,29 @@ public partial class AddAccountPage
 		BtnUsePasswordGenerator.IsVisible = !usePasswordGenerator;
 		StckPasswordGenerator.IsVisible = usePasswordGenerator;
     }
+
+	private bool ValidateForm()
+	{
+		bool isValid = true;
+		if (string.IsNullOrEmpty(viewModel.SitioWeb))
+		{
+			isValid = false;
+			viewModel.SitioWeb = "";
+        }
+		if (string.IsNullOrEmpty(viewModel.Usuario))
+		{
+			isValid = false;
+			viewModel.Usuario = "";
+        }
+		if (string.IsNullOrEmpty(viewModel.Password))
+		{
+			isValid = false;
+			viewModel.Password = "";
+        }
+		return isValid;
+	}
+    private async void BtnGuardar_Clicked(object sender, EventArgs e)
+    {
+		if (ValidateForm()) await viewModel.SaveAccount();
+    }
 }
