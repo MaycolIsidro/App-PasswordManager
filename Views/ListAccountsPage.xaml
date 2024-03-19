@@ -59,17 +59,38 @@
                                            HeightRequest="55"
                                            WidthRequest="55"
                                            VerticalOptions="CenterAndExpand"
-                                           BackgroundColor="Red">
-                                        <!--<Image Source="facebook"
-                                               HeightRequest="35" />-->
-                                        <Label Text="{Binding Icono}"
-                                               FontSize="28"
-                                               Margin="0"
-                                               HorizontalOptions="Center"
-                                               VerticalOptions="Center"
-                                               Padding="0"
-                                               TextColor="White"
-                                               FontAttributes="Bold" />
+                                           BackgroundColor="{Binding BackColorIcon}">
+                                        <StackLayout VerticalOptions="Center">
+                                            <Image Source="{Binding IconImage}"
+                                                   VerticalOptions="Center"
+                                                   HeightRequest="35">
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image"
+                                                                 Binding="{Binding IconImage}"
+                                                                 Value="">
+                                                        <Setter Property="IsVisible"
+                                                                Value="False"/>
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <Label Text="{Binding IconText}"
+                                                   FontSize="28"
+                                                   Margin="0"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Padding="0"
+                                                   TextColor="White"
+                                                   FontAttributes="Bold">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                                 Binding="{Binding IconText}"
+                                                                 Value="">
+                                                        <Setter Property="IsVisible"
+                                                                Value="False" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </StackLayout>
                                     </Frame>
                                     <StackLayout Spacing="2"
                                                  HorizontalOptions="FillAndExpand">

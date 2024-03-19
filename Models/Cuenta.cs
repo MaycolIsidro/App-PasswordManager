@@ -16,9 +16,10 @@ public class Cuenta : BaseViewModel
         get { return ShowPassword ? passwordView : "********"; }
         set { SetValue(ref passwordView, value); }
     }
-    public string IconoName { get; set; }
-    public string Icono => string.IsNullOrEmpty(IconoName) ? Nombre[0].ToString().ToUpper() : IconoName;
+    public string IconImage { get; set; }
+    public string IconText => string.IsNullOrEmpty(IconImage) ? Nombre[0].ToString().ToUpper() : "";
     public DateTime UltimoAcceso { get; set; }
     public int CategoriaId { get; set; }
     public bool ShowPassword { get; set; }
+    public string BackColorIcon { get; set; } = "#EFEFEF";
 }

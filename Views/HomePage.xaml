@@ -89,16 +89,32 @@
                                 <SwipeItems>
                                     <SwipeItemView Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
                                                    CommandParameter="{Binding .}">
-                                        <Button BackgroundColor="#FF9090"
-                                                Margin="5"
-                                                Padding="10"
-                                                MinimumHeightRequest="5"
-                                                VerticalOptions="CenterAndExpand"
-                                                MinimumWidthRequest="5"
-                                                FontSize="20"
-                                                Text="&#xf2ed;"
-                                                FontFamily="FAR"
-                                                CornerRadius="50" />
+                                        <HorizontalStackLayout>
+                                            <Button BackgroundColor="#C5D5FF"
+                                                    Margin="5"
+                                                    Padding="10"
+                                                    MinimumHeightRequest="5"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    MinimumWidthRequest="5"
+                                                    FontSize="20"
+                                                    Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
+                                                    CommandParameter="{Binding .}"
+                                                    Text="&#xf304;"
+                                                    FontFamily="FAS"
+                                                    CornerRadius="50" />
+                                            <Button BackgroundColor="#FF9090"
+                                                    Margin="5"
+                                                    Padding="10"
+                                                    MinimumHeightRequest="5"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    MinimumWidthRequest="5"
+                                                    FontSize="20"
+                                                    Text="&#xf2ed;"
+                                                    Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
+                                                    CommandParameter="{Binding .}"
+                                                    FontFamily="FAR"
+                                                    CornerRadius="50" />
+                                        </HorizontalStackLayout>
                                     </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.RightItems>
@@ -106,11 +122,43 @@
                                    CornerRadius="15">
                                 <StackLayout Spacing="10"
                                              Orientation="Horizontal">
-                                    <Frame Padding="10"
-                                           CornerRadius="15"
-                                           BackgroundColor="#EFEFEF">
-                                        <Image Source="facebook"
-                                               HeightRequest="30" />
+                                    <Frame Padding="0"
+                                           CornerRadius="40"
+                                           HeightRequest="55"
+                                           WidthRequest="55"
+                                           VerticalOptions="CenterAndExpand"
+                                           BackgroundColor="{Binding BackColorIcon}">
+                                        <StackLayout VerticalOptions="Center">
+                                            <Image Source="{Binding IconImage}"
+                                                   VerticalOptions="Center"
+                                                   HeightRequest="35">
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image"
+                                                                 Binding="{Binding IconImage}"
+                                                                 Value="">
+                                                        <Setter Property="IsVisible"
+                                                                Value="False" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <Label Text="{Binding IconText}"
+                                                   FontSize="28"
+                                                   Margin="0"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Padding="0"
+                                                   TextColor="White"
+                                                   FontAttributes="Bold">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                                 Binding="{Binding IconText}"
+                                                                 Value="">
+                                                        <Setter Property="IsVisible"
+                                                                Value="False" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </StackLayout>
                                     </Frame>
                                     <StackLayout Spacing="2"
                                                  HorizontalOptions="FillAndExpand">

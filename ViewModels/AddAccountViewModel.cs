@@ -22,6 +22,7 @@ public class AddAccountViewModel : BaseViewModel
     public bool UseLowers { get; set; } = true;
     readonly TextEncript encript = new();
     readonly SQLiteHelper db = new();
+    readonly string[] colorsBackgroundIcon = ["#FFBABA", "#BAFFC3", "#BAFCFF", "#AAC1FF", "#D4AAFF", "#FFFFAA"]; 
     #endregion
     #region CONSTRUCTOR
     public AddAccountViewModel(INavigation navigation, int idCategoria)
@@ -96,8 +97,10 @@ public class AddAccountViewModel : BaseViewModel
                 UltimoAcceso = DateTime.Now,
                 Usuario = Usuario,
                 Password = password,
-                CategoriaId = IdCategoria
+                CategoriaId = IdCategoria,
+                IconImage = Icon??=""
             };
+            if (string.IsNullOrEmpty(Icon)) account.BackColorIcon = SelectBackColorIconRandom();
             await db.Save(account);
             await Navigation.PopAsync();
         }
@@ -121,6 +124,12 @@ public class AddAccountViewModel : BaseViewModel
     private void SelectIcon(string icon)
     {
         Icon = icon;
+    }
+    private string SelectBackColorIconRandom()
+    {
+        Random random = new();
+        var index = random.Next(0, colorsBackgroundIcon.Length);
+        return colorsBackgroundIcon[index];
     }
     #endregion
     #region COMANDOS
