@@ -76,13 +76,34 @@
                         <Label Text="Nombre" />
                         <Frame Padding="5,0"
                                BorderColor="#E9EFFF">
-                            <Entry Text="{Binding SitioWeb}"
-                                   TextColor="Black">
-                                <Entry.Behaviors>
-                                    <behaviors:EntryValidator />
-                                </Entry.Behaviors>
-                            </Entry>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Text="{Binding SitioWeb}"
+                                       HorizontalOptions="FillAndExpand"
+                                       TextColor="Black">
+                                    <!--<Entry.Behaviors>
+                                        <behaviors:EntryValidator />
+                                    </Entry.Behaviors>-->
+                                </Entry>
+                                <Image HeightRequest="35"
+                                       Source="{Binding Icon}" />
+                            </StackLayout>
                         </Frame>
+                        <CollectionView ItemsSource="{Binding Icons}"
+                                        x:Name="lsIcons">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"
+                                                 HorizontalItemSpacing="8" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <ImageButton Source="{Binding .}"
+                                                 WidthRequest="35"
+                                                 Command="{Binding Path=BindingContext.SelectIconCommand, Source={x:Reference lsIcons}}"
+                                                 CommandParameter="{Binding .}"
+                                                 HeightRequest="35" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                     <StackLayout Spacing="5">
                         <Label Text="Usuario" />

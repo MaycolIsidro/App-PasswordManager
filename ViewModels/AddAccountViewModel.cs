@@ -11,6 +11,8 @@ public class AddAccountViewModel : BaseViewModel
     private int lengthPassword = 16;
     private int idCategoria;
     private string errorPasswordGenerator = "";
+    private List<string> icons;
+    private string icon;
     string _Password;
     public string SitioWeb { get; set; }
     public string Usuario { get; set; }
@@ -26,6 +28,11 @@ public class AddAccountViewModel : BaseViewModel
     {
         Navigation = navigation;
         IdCategoria = idCategoria;
+        Icons = [
+            "facebook",
+            "instagram",
+            "snapchat"
+        ];
     }
     #endregion
     #region OBJETOS
@@ -48,6 +55,16 @@ public class AddAccountViewModel : BaseViewModel
     {
         get { return errorPasswordGenerator; }
         set { SetValue(ref errorPasswordGenerator, value); }
+    }
+    public List<string> Icons
+    {
+        get { return icons; }
+        set { SetValue(ref icons, value); }
+    }
+    public string Icon
+    {
+        get { return icon; }
+        set { SetValue(ref icon, value); }
     }
     #endregion
     #region PROCESOS
@@ -101,6 +118,10 @@ public class AddAccountViewModel : BaseViewModel
     {
         await Clipboard.Default.SetTextAsync(Password);
     }
+    private void SelectIcon(string icon)
+    {
+        Icon = icon;
+    }
     #endregion
     #region COMANDOS
     public ICommand GeneratePasswordCommand => new Command(GeneratePassword);
@@ -109,5 +130,6 @@ public class AddAccountViewModel : BaseViewModel
     public ICommand SeleccionarCategoriaCommand => new Command<string>(SeleccionarCategoria);
     public ICommand SaveCommand => new Command(async () => await SaveAccount());
     public ICommand CopyToClipboardCommand => new Command(CopyToClipboard);
+    public ICommand SelectIconCommand => new Command<string>(SelectIcon);
     #endregion
 }
