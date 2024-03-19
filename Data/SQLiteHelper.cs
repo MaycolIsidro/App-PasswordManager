@@ -43,7 +43,7 @@ public class SQLiteHelper
     public async Task<List<Cuenta>> GetAccountsRecent()
     {
         await Init();
-        return await Database.Table<Cuenta>().OrderByDescending(p => p.UltimoAcceso).Take(2).ToListAsync();
+        return await Database.Table<Cuenta>().OrderByDescending(p => p.UltimoAcceso).Take(4).ToListAsync();
     }
     public async Task<List<Cuenta>> GetAccounts(int idCategoria)
     {
