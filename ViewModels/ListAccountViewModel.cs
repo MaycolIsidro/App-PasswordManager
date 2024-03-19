@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Data;
+using PasswordManager.Helpers;
 using PasswordManager.Models;
 using PasswordManager.Views;
 using System.Collections.ObjectModel;
@@ -12,16 +13,24 @@ public class ListAccountViewModel : BaseViewModel
     private string textSearch;
     private int idCategoria;
     readonly SQLiteHelper db = new ();
-    public ObservableCollection<Cuenta> ListAccounts { get; set; }
+    readonly TextEncript textEncript = new();
+    private ObservableCollection<Cuenta> listAccounts;
+    public ObservableCollection<Cuenta> ListAccounts
+    {
+        get => listAccounts;
+        set
+        {
+            SetValue(ref listAccounts, value);
+        }
+    }
     #endregion
     #region CONSTRUCTOR
     public ListAccountViewModel(INavigation navigation, int idCategoria)
     {
         Navigation = navigation;
         this.idCategoria = idCategoria;
-        if (idCategoria == 1) Title = "Redes Sociales";
-        else if (idCategoria == 1) Title = "Aplicaciones";
-        else Title = "Tarjetas";
+        if (idCategoria == 1) Title = "Sitios Web";
+        else if (idCategoria == 2) Title = "Aplicaciones";
     }
     #endregion
     #region OBJETOS
@@ -45,8 +54,15 @@ public class ListAccountViewModel : BaseViewModel
     {
         await Navigation.PushAsync(new AddAccountPage(idCategoria));
     }
+    private void ShowPassword(Cuenta cuenta)
+    {
+        cuenta.ShowPassword = !cuenta.ShowPassword;
+        if (cuenta.ShowPassword) cuenta.PasswordView = textEncript.DesencriptPassword(cuenta.Password);
+        else cuenta.PasswordView = cuenta.Password;
+    }
     #endregion
     #region COMANDOS
-    //public ICommand SaveCommand => new Command(async () => await UpdateAccount());
+    public ICommand RedirectAddAccountCommand => new Command(async () => await RedirectAddAccount());
+    public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
     #endregion
 }

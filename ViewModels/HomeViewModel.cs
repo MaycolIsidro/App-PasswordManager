@@ -1,5 +1,6 @@
 ﻿using Mopups.Services;
 using PasswordManager.Data;
+using PasswordManager.Helpers;
 using PasswordManager.Models;
 using PasswordManager.Views;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ public class HomeViewModel : BaseViewModel
     #region VARIABLES
     private ObservableCollection<Cuenta> cuentas;
     private readonly SQLiteHelper db;
+    readonly TextEncript textEncript = new();
     #endregion
     #region CONSTRUCTOR
     public HomeViewModel(INavigation navigation)
@@ -49,11 +51,17 @@ public class HomeViewModel : BaseViewModel
     }
     private async void CopyToClipboard(Cuenta cuenta)
     {
-        await Clipboard.Default.SetTextAsync(cuenta.Password);
+        await Clipboard.Default.SetTextAsync(textEncript.DesencriptPassword(cuenta.Password));
     }
     private async Task RedirectionToListAccounts(string idCategoria)
     {
         await Navigation.PushAsync(new ListAccountsPage(int.Parse(idCategoria)));
+    }
+    private void ShowPassword(Cuenta cuenta)
+    {
+        cuenta.ShowPassword = !cuenta.ShowPassword;
+        if (cuenta.ShowPassword) cuenta.PasswordView = textEncript.DesencriptPassword(cuenta.Password);
+        else cuenta.PasswordView = cuenta.Password;
     }
     #endregion
     #region COMANDOS
@@ -62,5 +70,6 @@ public class HomeViewModel : BaseViewModel
     public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
     public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
     public ICommand RedirectListAccountsCommand => new Command<string>(async (p) => await RedirectionToListAccounts(p));
+    public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
     #endregion
 }

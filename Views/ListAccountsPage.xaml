@@ -25,16 +25,28 @@
                                 <SwipeItems>
                                     <SwipeItemView Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
                                                    CommandParameter="{Binding .}">
-                                        <Button BackgroundColor="#FF9090"
-                                                Margin="5"
-                                                Padding="10"
-                                                MinimumHeightRequest="5"
-                                                VerticalOptions="CenterAndExpand"
-                                                MinimumWidthRequest="5"
-                                                FontSize="20"
-                                                Text="&#xf2ed;"
-                                                FontFamily="FAR"
-                                                CornerRadius="50" />
+                                        <HorizontalStackLayout>
+                                            <Button BackgroundColor="#C5D5FF"
+                                                    Margin="5"
+                                                    Padding="10"
+                                                    MinimumHeightRequest="5"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    MinimumWidthRequest="5"
+                                                    FontSize="20"
+                                                    Text="&#xf304;"
+                                                    FontFamily="FAS"
+                                                    CornerRadius="50" />
+                                            <Button BackgroundColor="#FF9090"
+                                                    Margin="5"
+                                                    Padding="10"
+                                                    MinimumHeightRequest="5"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    MinimumWidthRequest="5"
+                                                    FontSize="20"
+                                                    Text="&#xf2ed;"
+                                                    FontFamily="FAR"
+                                                    CornerRadius="50" />
+                                        </HorizontalStackLayout>
                                     </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.RightItems>
@@ -67,7 +79,7 @@
                                         <Label Text="usuario@gmail.com"
                                                FontSize="15" />
                                         <HorizontalStackLayout Spacing="5">
-                                            <Label Text="********"
+                                            <Label Text="{Binding PasswordView}"
                                                    VerticalOptions="Center" />
                                             <Button Text="&#xf06e;"
                                                     Padding="3"
@@ -76,6 +88,8 @@
                                                     TextColor="Black"
                                                     MinimumHeightRequest="5"
                                                     MinimumWidthRequest="5"
+                                                    Command="{Binding Path=BindingContext.ShowPasswordCommand, Source={x:Reference lstAccounts}}"
+                                                    CommandParameter="{Binding .}"
                                                     FontFamily="FAS" />
                                         </HorizontalStackLayout>
                                     </StackLayout>

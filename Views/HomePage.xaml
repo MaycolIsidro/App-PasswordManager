@@ -114,11 +114,25 @@
                                     </Frame>
                                     <StackLayout Spacing="2"
                                                  HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding SitioWeb}"
+                                        <Label Text="{Binding Nombre}"
                                                FontSize="17"
                                                FontAttributes="Bold" />
                                         <Label Text="usuario@gmail.com"
                                                FontSize="15" />
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label Text="{Binding PasswordView}"
+                                                   VerticalOptions="Center" />
+                                            <Button Text="&#xf06e;"
+                                                    Padding="3"
+                                                    FontSize="12"
+                                                    BackgroundColor="Transparent"
+                                                    TextColor="Black"
+                                                    MinimumHeightRequest="5"
+                                                    MinimumWidthRequest="5"
+                                                    Command="{Binding Path=BindingContext.ShowPasswordCommand, Source={x:Reference lstAccounts}}"
+                                                    CommandParameter="{Binding .}"
+                                                    FontFamily="FAS" />
+                                        </HorizontalStackLayout>
                                     </StackLayout>
                                     <Button Text="&#xf0c5;"
                                             Padding="5"
@@ -131,16 +145,8 @@
                                             Margin="0,0,5,0"
                                             FontFamily="FAR"
                                             Command="{Binding Path=BindingContext.CopyToClipboardCommand, Source={x:Reference lstAccounts}}"
-                                            CommandParameter="{Binding .}"/>
-                                    <!--<StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
-                                                              CommandParameter="{Binding .}" />
-                                    </StackLayout.GestureRecognizers>-->
+                                            CommandParameter="{Binding .}" />
                                 </StackLayout>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.ShowDetailsCommand, Source={x:Reference lstAccounts}}"
-                                                          CommandParameter="{Binding .}" />
-                                </Frame.GestureRecognizers>
                             </Frame>
                         </SwipeView>
                     </DataTemplate>
@@ -152,6 +158,7 @@
             </CollectionView>
         </VerticalStackLayout>
         <Button Style="{StaticResource BtnFloating}"
+
                 Command="{Binding RedirectAddCommand}" />
     </Grid>
 </ContentPage>
