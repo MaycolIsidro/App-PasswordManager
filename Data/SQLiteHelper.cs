@@ -27,7 +27,7 @@ public class SQLiteHelper
     public async Task<User?> LoginUser(string user, string password)
     {
         await Init();
-        TextEncript encript = new TextEncript();
+        TextEncript encript = new ();
         var userFound = await Database.Table<User>().FirstOrDefaultAsync(p => p.Usuario == user);
         if (userFound == null) return null;
         var clave = encript.DesencriptPassword(userFound.Password);
@@ -43,7 +43,7 @@ public class SQLiteHelper
     public async Task<List<Cuenta>> GetAccountsRecent()
     {
         await Init();
-        return await Database.Table<Cuenta>().ToListAsync();
+        return await Database.Table<Cuenta>().OrderByDescending(p => p.UltimoAcceso).Take(2).ToListAsync();
     }
     public async Task<List<Cuenta>> GetAccounts(int idCategoria)
     {
