@@ -20,10 +20,10 @@
                                            BackgroundColor="#F5F5F5"
                                            HorizontalOptions="Center"
                                            CornerRadius="50">
-                                        <Image Source="world"
+                                        <Image Source="web"
                                                HeightRequest="30" />
                                     </Frame>
-                                    <Label Text="Red Social"
+                                    <Label Text="Sitio Web"
                                            Margin="0,10,0,0"
                                            HorizontalOptions="Center"
                                            FontAttributes="Bold" />
@@ -106,9 +106,9 @@
                                     <StackLayout Orientation="Horizontal">
                                         <Entry Text="{Binding Password}"
                                                HorizontalOptions="FillAndExpand">
-                                            <Entry.Behaviors>
+                                            <!--<Entry.Behaviors>
                                                 <behaviors:EntryValidator />
-                                            </Entry.Behaviors>
+                                            </Entry.Behaviors>-->
                                         </Entry>
                                         <Button Text="&#xf0c5;"
                                                 Padding="5"

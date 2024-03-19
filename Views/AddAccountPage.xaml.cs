@@ -8,7 +8,7 @@ public partial class AddAccountPage
     public AddAccountPage(int idCategoria)
 	{
 		InitializeComponent();
-		BindingContext = viewModel = new AddAccountViewModel(idCategoria);
+		BindingContext = viewModel = new AddAccountViewModel(Navigation,idCategoria);
 	}
 
     private void Button_Clicked(object sender, EventArgs e)

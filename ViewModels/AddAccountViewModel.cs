@@ -22,8 +22,9 @@ public class AddAccountViewModel : BaseViewModel
     readonly SQLiteHelper db = new();
     #endregion
     #region CONSTRUCTOR
-    public AddAccountViewModel(int idCategoria)
+    public AddAccountViewModel(INavigation navigation, int idCategoria)
     {
+        Navigation = navigation;
         IdCategoria = idCategoria;
     }
     #endregion
