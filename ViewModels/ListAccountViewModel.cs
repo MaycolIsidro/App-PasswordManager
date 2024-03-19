@@ -54,6 +54,10 @@ public class ListAccountViewModel : BaseViewModel
     {
         await Navigation.PushAsync(new AddAccountPage(idCategoria));
     }
+    private async void CopyToClipboard(Cuenta cuenta)
+    {
+        await Clipboard.Default.SetTextAsync(textEncript.DesencriptPassword(cuenta.Password));
+    }
     private void ShowPassword(Cuenta cuenta)
     {
         cuenta.ShowPassword = !cuenta.ShowPassword;
@@ -64,5 +68,6 @@ public class ListAccountViewModel : BaseViewModel
     #region COMANDOS
     public ICommand RedirectAddAccountCommand => new Command(async () => await RedirectAddAccount());
     public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
+    public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
     #endregion
 }
