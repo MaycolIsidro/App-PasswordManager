@@ -10,4 +10,9 @@ public partial class ListAccountsPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel = new ListAccountViewModel(Navigation, idCategoria);
 	}
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+		await viewModel.GetAccounts();
+    }
 }

@@ -4,6 +4,7 @@
              x:Class="PasswordManager.Views.ListAccountsPage"
              Title="{Binding Title}">
     <StackLayout Padding="15"
+                 Spacing="10"
                  BackgroundColor="#F3F6FE">
         <Frame Padding="0"
                CornerRadius="15">
@@ -11,8 +12,97 @@
         </Frame>
         <Grid RowDefinitions="*"
               VerticalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding ListAccounts}"
+                            x:Name="lstAccounts">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="7" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItemView Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
+                                                   CommandParameter="{Binding .}">
+                                        <Button BackgroundColor="#FF9090"
+                                                Margin="5"
+                                                Padding="10"
+                                                MinimumHeightRequest="5"
+                                                VerticalOptions="CenterAndExpand"
+                                                MinimumWidthRequest="5"
+                                                FontSize="20"
+                                                Text="&#xf2ed;"
+                                                FontFamily="FAR"
+                                                CornerRadius="50" />
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame Padding="10"
+                                   CornerRadius="15">
+                                <StackLayout Spacing="10"
+                                             Orientation="Horizontal">
+                                    <Frame Padding="0"
+                                           CornerRadius="40"
+                                           HeightRequest="55"
+                                           WidthRequest="55"
+                                           VerticalOptions="CenterAndExpand"
+                                           BackgroundColor="Red">
+                                        <!--<Image Source="facebook"
+                                               HeightRequest="35" />-->
+                                        <Label Text="{Binding Icono}"
+                                               FontSize="28"
+                                               Margin="0"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               Padding="0"
+                                               TextColor="White"
+                                               FontAttributes="Bold" />
+                                    </Frame>
+                                    <StackLayout Spacing="2"
+                                                 HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Nombre}"
+                                               FontSize="17"
+                                               FontAttributes="Bold" />
+                                        <Label Text="usuario@gmail.com"
+                                               FontSize="15" />
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label Text="********"
+                                                   VerticalOptions="Center" />
+                                            <Button Text="&#xf06e;"
+                                                    Padding="3"
+                                                    FontSize="12"
+                                                    BackgroundColor="Transparent"
+                                                    TextColor="Black"
+                                                    MinimumHeightRequest="5"
+                                                    MinimumWidthRequest="5"
+                                                    FontFamily="FAS" />
+                                        </HorizontalStackLayout>
+                                    </StackLayout>
+                                    <Button Text="&#xf0c5;"
+                                            Padding="5"
+                                            TextColor="Black"
+                                            BackgroundColor="Transparent"
+                                            MinimumHeightRequest="5"
+                                            MinimumWidthRequest="5"
+                                            FontSize="17"
+                                            VerticalOptions="Center"
+                                            Margin="0,0,5,0"
+                                            FontFamily="FAR"
+                                            Command="{Binding Path=BindingContext.CopyToClipboardCommand, Source={x:Reference lstAccounts}}"
+                                            CommandParameter="{Binding .}" />
+                                </StackLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="Aún no has registrado cuentas"
+                           HorizontalOptions="CenterAndExpand" />
+                </CollectionView.EmptyView>
+            </CollectionView>
             <Button Style="{StaticResource BtnFloating}"
-                    Command="{Binding RedirectAddCommand}"/>
+                    Command="{Binding RedirectAddAccountCommand}" />
         </Grid>
     </StackLayout>
 </ContentPage>
