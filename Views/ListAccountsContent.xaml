@@ -17,11 +17,13 @@
                                 <HorizontalStackLayout>
                                     <Button BackgroundColor="#C5D5FF"
                                             Text="&#xf304;"
+                                            Style="{StaticResource BtnSwipedItem}"
                                             FontFamily="FAS" />
                                     <Button BackgroundColor="#FF9090"
                                             Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
                                             CommandParameter="{Binding .}"
                                             Text="&#xf2ed;"
+                                            Style="{StaticResource BtnSwipedItem}"
                                             FontFamily="FAR" />
                                 </HorizontalStackLayout>
                             </SwipeItemView>
