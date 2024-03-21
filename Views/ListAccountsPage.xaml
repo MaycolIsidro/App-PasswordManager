@@ -23,8 +23,7 @@
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <SwipeItemView Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
-                                                   CommandParameter="{Binding .}">
+                                    <SwipeItemView>
                                         <HorizontalStackLayout>
                                             <Button BackgroundColor="#C5D5FF"
                                                     Margin="5"
@@ -43,6 +42,8 @@
                                                     VerticalOptions="CenterAndExpand"
                                                     MinimumWidthRequest="5"
                                                     FontSize="20"
+                                                    Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
+                                                    CommandParameter="{Binding .}"
                                                     Text="&#xf2ed;"
                                                     FontFamily="FAR"
                                                     CornerRadius="50" />

@@ -71,10 +71,20 @@ public class ListAccountViewModel : BaseViewModel
         cuenta.UltimoAcceso = DateTime.Now;
         await db.UpdateAccount(cuenta);
     }
+    private async Task DeleteAccount(Cuenta account)
+    {
+        bool question = await DisplayAlert("Aviso", "¿Está seguro que desea eliminar el registro?", "Sí", "No");
+        if (question)
+        {
+            ListAccounts.Remove(account);
+            await db.DeleteAccount(account);
+        }
+    }
     #endregion
     #region COMANDOS
     public ICommand RedirectAddAccountCommand => new Command(async () => await RedirectAddAccount());
     public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
     public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
+    public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
     #endregion
 }
