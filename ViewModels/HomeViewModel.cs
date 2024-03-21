@@ -13,6 +13,8 @@ public class HomeViewModel : BaseViewModel
     private ObservableCollection<Cuenta> cuentas;
     private readonly SQLiteHelper db;
     readonly TextEncript textEncript = new();
+    private int numbersOfWebsite;
+    private int numbersOfApps;
     #endregion
     #region CONSTRUCTOR
     public HomeViewModel(INavigation navigation)
@@ -27,6 +29,16 @@ public class HomeViewModel : BaseViewModel
         get { return cuentas; }
         set { SetValue(ref cuentas, value); }
     }
+    public int NumbersOfWebsite
+    {
+        get { return numbersOfWebsite; }
+        set { SetValue(ref numbersOfWebsite, value); }
+    }
+    public int NumbersOfApps
+    {
+        get { return numbersOfApps; }
+        set { SetValue(ref numbersOfApps, value); }
+    }
     #endregion
     #region PROCESOS
     public async Task RedirectAddAccount()
@@ -37,6 +49,12 @@ public class HomeViewModel : BaseViewModel
     {
         Cuentas = new ObservableCollection<Cuenta>(await db.GetAccountsRecent());
     }
+    public async Task GetTotalAccounts()
+    {
+        var numbersOfAccounts = await db.GetNumberForAccounts();
+        NumbersOfWebsite = numbersOfAccounts.Item1;
+        NumbersOfApps = numbersOfAccounts.Item2;
+    }
     public async Task ShowDetails(Cuenta account)
     {
         await MopupService.Instance.PushAsync(new DetailsAccountPage(account));
@@ -46,7 +64,9 @@ public class HomeViewModel : BaseViewModel
         bool question = await DisplayAlert("Aviso", "¿Está seguro que desea eliminar el registro?", "Sí", "No");
         if (question)
         {
+            Cuentas.Remove(account);
             await db.DeleteAccount(account);
+            await GetTotalAccounts();
         }
     }
     private async void CopyToClipboard(Cuenta cuenta)

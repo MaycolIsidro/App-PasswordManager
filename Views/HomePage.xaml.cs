@@ -26,5 +26,6 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 		await vm.GetCuentas();
+        await vm.GetTotalAccounts();
     }
 }

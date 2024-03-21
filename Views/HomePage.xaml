@@ -41,7 +41,7 @@
                                Margin="0,10,0,0"
                                HorizontalOptions="Center"
                                FontAttributes="Bold" />
-                        <Label Text="30 cuentas"
+                        <Label Text="{Binding NumbersOfWebsite, StringFormat='{0} cuentas'}"
                                HorizontalOptions="Center" />
                     </VerticalStackLayout>
                     <Frame.GestureRecognizers>
@@ -63,7 +63,7 @@
                                Margin="0,10,0,0"
                                HorizontalOptions="Center"
                                FontAttributes="Bold" />
-                        <Label Text="30 cuentas"
+                        <Label Text="{Binding NumbersOfApps, StringFormat='{0} cuentas'}"
                                HorizontalOptions="Center" />
                     </VerticalStackLayout>
                     <Frame.GestureRecognizers>
@@ -87,8 +87,7 @@
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <SwipeItemView Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
-                                                   CommandParameter="{Binding .}">
+                                    <SwipeItemView>
                                         <HorizontalStackLayout>
                                             <Button BackgroundColor="#C5D5FF"
                                                     Margin="5"
