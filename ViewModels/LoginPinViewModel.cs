@@ -58,7 +58,7 @@ namespace PasswordManager.ViewModels
         private async void ReturnLoginPage()
         {
             Preferences.Set("LastIdUserLogin", 0);
-            await Navigation.PushAsync(new LoginPage());
+            App.Current.MainPage = new NavigationPage(new LoginPage());
         }
         #endregion
         #region COMANDOS
