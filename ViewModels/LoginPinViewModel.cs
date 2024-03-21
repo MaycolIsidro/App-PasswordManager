@@ -1,8 +1,5 @@
-﻿using Mopups.Services;
-using PasswordManager.Data;
-using PasswordManager.Models;
+﻿using PasswordManager.Data;
 using PasswordManager.Views;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PasswordManager.ViewModels
@@ -11,7 +8,7 @@ namespace PasswordManager.ViewModels
     {
         #region VARIABLES
         private readonly SQLiteHelper db;
-        private string pin;
+        private string pin = "";
         private string error = "";
         #endregion
         #region CONSTRUCTOR
@@ -54,7 +51,7 @@ namespace PasswordManager.ViewModels
                 Pin = "";
                 return;
             }
-            App.Current.MainPage = new NavigationPage(new HomePage()); 
+            App.Current.MainPage = new NavigationPage(new HomePage(user)); 
         }
         private async void ReturnLoginPage()
         {
