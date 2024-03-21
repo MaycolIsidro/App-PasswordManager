@@ -88,15 +88,17 @@ public class HomeViewModel : BaseViewModel
     {
         await Navigation.PushAsync(new ListAccountsPage(int.Parse(idCategoria)));
     }
-    private async void ShowPassword(Cuenta cuenta)
+    private async Task ShowPassword(Cuenta cuenta)
     {
-        cuenta.ShowPassword = !cuenta.ShowPassword;
-        if (cuenta.ShowPassword)
+        if (!cuenta.ShowPassword)
         {
             await UpdateDateAccess(cuenta);
+            cuenta.ShowPassword = true;
             cuenta.PasswordView = textEncript.DesencriptPassword(cuenta.Password);
+            return;
         }
-        else cuenta.PasswordView = cuenta.Password;
+        cuenta.ShowPassword = false;
+        cuenta.PasswordView = cuenta.Password;
     }
     private async Task UpdateDateAccess(Cuenta cuenta)
     {
@@ -115,6 +117,6 @@ public class HomeViewModel : BaseViewModel
     public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
     public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
     public ICommand RedirectListAccountsCommand => new Command<string>(async (p) => await RedirectionToListAccounts(p));
-    public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
+    public ICommand ShowPasswordCommand => new Command<Cuenta>(async (p) => await ShowPassword(p));
     #endregion
 }
