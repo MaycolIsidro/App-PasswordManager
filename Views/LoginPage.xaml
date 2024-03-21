@@ -14,8 +14,7 @@
                FontAttributes="Bold"
                HorizontalTextAlignment="Center"/>
         <StackLayout Spacing="20">
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
                 <HorizontalStackLayout Spacing="7">
                     <Label Text="&#xf007;"
@@ -28,8 +27,7 @@
                            Text="{Binding User}"/>
                 </HorizontalStackLayout>
             </Frame>
-            <Frame Padding="15,5"
-                   BackgroundColor="{AppThemeBinding Dark=#8D8D8D}"
+            <Frame Padding="20,5"
                    CornerRadius="40">
                 <StackLayout Spacing="7"
                              Orientation="Horizontal">

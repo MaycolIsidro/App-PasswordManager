@@ -44,7 +44,9 @@ namespace PasswordManager.ViewModels
         }
         private async void LoginUser()
         {
-            var user = await db.LoginUserPin(Pin);
+            var lastIdUserLogin = Preferences.Get("LastIdUserLogin", 0);
+            if (lastIdUserLogin == 0) return;
+            var user = await db.LoginUserPin(lastIdUserLogin,Pin);
             if (user is null)
             {
                 Error = "El PIN es incorrecto";
@@ -55,7 +57,7 @@ namespace PasswordManager.ViewModels
         }
         private async void ReturnLoginPage()
         {
-            Preferences.Set("RecordarSesion", false);
+            Preferences.Set("LastIdUserLogin", 0);
             await Navigation.PushAsync(new LoginPage());
         }
         #endregion

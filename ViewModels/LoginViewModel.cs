@@ -8,21 +8,14 @@ public class LoginViewModel : BaseViewModel
     #region VARIABLES
     public string User { get; set; }
     public string Password { get; set; }
-    private bool recordarSesion;
     #endregion
     #region CONSTRUCTOR
     public LoginViewModel(INavigation navigation)
     {
         Navigation = navigation;
-        RecordarSesion = Preferences.Get("RecordarSesion", false);
     }
     #endregion
     #region OBJETOS
-    public bool RecordarSesion
-    {
-        get { return recordarSesion; }
-        set { SetValue(ref recordarSesion, value); }
-    }
     #endregion
     #region PROCESOS
     public async Task LoginUser()
@@ -34,7 +27,7 @@ public class LoginViewModel : BaseViewModel
             await DisplayAlert("Error", "Usuario y/o contraseña incorrectos", "Ok");
             return;
         }
-        Preferences.Set("RecordarSesion", RecordarSesion);
+        Preferences.Set("LastIdUserLogin", result.UserId);
         App.Current.MainPage = new NavigationPage(new HomePage(result));
     }
     public async Task RedirectSigin()
