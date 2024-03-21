@@ -50,10 +50,12 @@ public class SQLiteHelper
         await Init();
         return await Database.Table<Cuenta>().Where(p => p.CategoriaId == idCategoria).ToListAsync();
     }
-    public async Task<int> GetNumberForAccounts()
+    public async Task<(int, int)> GetNumberForAccounts()
     {
         await Init();
-        return await Database.Table<Cuenta>().Where(p => p.CategoriaId == 1).CountAsync();
+        var numbersOfWebsite = await Database.Table<Cuenta>().Where(p => p.CategoriaId == 1).CountAsync();
+        var numbersOfApps = await Database.Table<Cuenta>().Where(p => p.CategoriaId == 2).CountAsync();
+        return (numbersOfWebsite, numbersOfApps);
     }
     public async Task<int> DeleteAccount(Cuenta account)
     {
