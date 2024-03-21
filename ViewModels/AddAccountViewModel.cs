@@ -16,6 +16,7 @@ public class AddAccountViewModel : BaseViewModel
     private string icon;
     string _Password;
     private Cuenta account;
+    private string title;
     public string SitioWeb { get; set; }
     public string Usuario { get; set; }
     public bool UseNumbers { get; set; } = true;
@@ -30,8 +31,10 @@ public class AddAccountViewModel : BaseViewModel
     {
         Navigation = navigation;
         IdCategoria = idCategoria;
+        Title = "Agregar cuenta";
         if (account != null)
         {
+            Title = "Editar cuenta";
             Account = account;
             SitioWeb = Account.Nombre;
             Usuario = Account.Usuario;
@@ -75,6 +78,11 @@ public class AddAccountViewModel : BaseViewModel
     {
         get { return account; }
         set { SetValue(ref account, value); }
+    }
+    public string Title
+    {
+        get { return title; }
+        set { SetValue(ref title, value); }
     }
     #endregion
     #region PROCESOS

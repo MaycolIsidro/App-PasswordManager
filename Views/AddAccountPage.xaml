@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.AddAccountPage"
              xmlns:behaviors="clr-namespace:PasswordManager.Views.Behaviors"
-             Title="Agregar cuenta">
+             Title="{Binding Title}">
     <ScrollView>
         <StackLayout Padding="10"
                      BackgroundColor="#F3F6FE">
