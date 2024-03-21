@@ -34,10 +34,10 @@ public class SQLiteHelper
         if (clave == password) return userFound;
         return null;
     }
-    public async Task<User?> LoginUserPin(string pin)
+    public async Task<User?> LoginUserPin(int idUser, string pin)
     {
         await Init();
-        var user = await Database.Table<User>().FirstOrDefaultAsync(p => p.ClavePin == pin);
+        var user = await Database.Table<User>().FirstOrDefaultAsync(p => p.ClavePin == pin && p.UserId == idUser);
         return user;
     }
     public async Task<List<Cuenta>> GetAccountsRecent()
