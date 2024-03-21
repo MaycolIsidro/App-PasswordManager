@@ -21,5 +21,5 @@ public class Cuenta : BaseViewModel
     public DateTime UltimoAcceso { get; set; }
     public int CategoriaId { get; set; }
     public bool ShowPassword { get; set; }
-    public string BackColorIcon { get; set; } = "#EFEFEF";
+    public string BackColorIcon => string.IsNullOrEmpty(IconImage) ? "#3162F2" : "#EFEFEF";
 }
