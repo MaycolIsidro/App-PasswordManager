@@ -67,12 +67,17 @@ public class ListAccountViewModel : BaseViewModel
         await UpdateDateAccess(cuenta);
         await Clipboard.Default.SetTextAsync(textEncript.DesencriptPassword(cuenta.Password));
     }
-    private async void ShowPassword(Cuenta cuenta)
+    private async Task ShowPassword(Cuenta cuenta)
     {
-        await UpdateDateAccess(cuenta);
-        cuenta.ShowPassword = !cuenta.ShowPassword;
-        if (cuenta.ShowPassword) cuenta.PasswordView = textEncript.DesencriptPassword(cuenta.Password);
-        else cuenta.PasswordView = cuenta.Password;
+        if (!cuenta.ShowPassword)
+        {
+            await UpdateDateAccess(cuenta);
+            cuenta.ShowPassword = true;
+            cuenta.PasswordView = textEncript.DesencriptPassword(cuenta.Password);
+            return;
+        }
+        cuenta.ShowPassword = false;
+        cuenta.PasswordView = cuenta.Password;
     }
     private async Task UpdateDateAccess(Cuenta cuenta)
     {
@@ -96,7 +101,7 @@ public class ListAccountViewModel : BaseViewModel
     #endregion
     #region COMANDOS
     public ICommand RedirectAddAccountCommand => new Command(async () => await RedirectAddAccount());
-    public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
+    public ICommand ShowPasswordCommand => new Command<Cuenta>(async (p) => await ShowPassword(p));
     public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
     public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
     public ICommand RedirectEditAccountCommand => new Command<Cuenta>(async (p) => await RedirectEditAccount(p));
