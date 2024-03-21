@@ -11,7 +11,7 @@ public class ListAccountViewModel : BaseViewModel
     #region VARIABLES
     private string title;
     private string textSearch;
-    private int idCategoria;
+    private readonly int idCategoria;
     readonly SQLiteHelper db = new ();
     readonly TextEncript textEncript = new();
     private ObservableCollection<Cuenta> listAccounts;
@@ -54,6 +54,10 @@ public class ListAccountViewModel : BaseViewModel
     {
         await Navigation.PushAsync(new AddAccountPage(idCategoria));
     }
+    public async Task RedirectEditAccount(Cuenta account)
+    {
+        await Navigation.PushAsync(new AddAccountPage(account.CategoriaId, account));
+    }
     private async void CopyToClipboard(Cuenta cuenta)
     {
         await UpdateDateAccess(cuenta);
@@ -86,5 +90,6 @@ public class ListAccountViewModel : BaseViewModel
     public ICommand ShowPasswordCommand => new Command<Cuenta>(ShowPassword);
     public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
     public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
+    public ICommand RedirectEditAccountCommand => new Command<Cuenta>(async (p) => await RedirectEditAccount(p));
     #endregion
 }
