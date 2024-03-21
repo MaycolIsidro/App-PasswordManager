@@ -3,6 +3,7 @@ using PasswordManager.Data;
 using PasswordManager.Helpers;
 using PasswordManager.Models;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PasswordManager.ViewModels;
 public class AddAccountViewModel : BaseViewModel
@@ -11,9 +12,10 @@ public class AddAccountViewModel : BaseViewModel
     private int lengthPassword = 16;
     private int idCategoria;
     private string errorPasswordGenerator = "";
-    private List<string> icons;
+    private List<string> icons = ["facebook","instagram","snapchat"];
     private string icon;
     string _Password;
+    private Cuenta account;
     public string SitioWeb { get; set; }
     public string Usuario { get; set; }
     public bool UseNumbers { get; set; } = true;
@@ -22,18 +24,20 @@ public class AddAccountViewModel : BaseViewModel
     public bool UseLowers { get; set; } = true;
     readonly TextEncript encript = new();
     readonly SQLiteHelper db = new();
-    readonly string[] colorsBackgroundIcon = ["#FFBABA", "#BAFFC3", "#BAFCFF", "#AAC1FF", "#D4AAFF", "#FFFFAA"]; 
     #endregion
     #region CONSTRUCTOR
-    public AddAccountViewModel(INavigation navigation, int idCategoria)
+    public AddAccountViewModel(INavigation navigation, int idCategoria, Cuenta? account)
     {
         Navigation = navigation;
         IdCategoria = idCategoria;
-        Icons = [
-            "facebook",
-            "instagram",
-            "snapchat"
-        ];
+        if (account != null)
+        {
+            Account = account;
+            SitioWeb = Account.Nombre;
+            Usuario = Account.Usuario;
+            Icon = Account.IconImage;
+            Password = encript.DesencriptPassword(Account.Password);
+        }
     }
     #endregion
     #region OBJETOS
@@ -67,6 +71,11 @@ public class AddAccountViewModel : BaseViewModel
         get { return icon; }
         set { SetValue(ref icon, value); }
     }
+    public Cuenta Account
+    {
+        get { return account; }
+        set { SetValue(ref account, value); }
+    }
     #endregion
     #region PROCESOS
     private void GeneratePassword()
@@ -92,6 +101,18 @@ public class AddAccountViewModel : BaseViewModel
         try
         {
             var password = encript.EncriptPassword(Password);
+            if (Account != null)
+            {
+                Account.Nombre = SitioWeb;
+                Account.UltimoAcceso = DateTime.Now;
+                Account.Usuario = Usuario;
+                Account.Password = password;
+                Account.CategoriaId = IdCategoria;
+                Account.IconImage = Icon;
+                await db.UpdateAccount(Account);
+                await Navigation.PopAsync();
+                return;
+            }
             Cuenta account = new()
             {
                 Nombre = SitioWeb,
@@ -101,7 +122,6 @@ public class AddAccountViewModel : BaseViewModel
                 CategoriaId = IdCategoria,
                 IconImage = Icon??=""
             };
-            if (string.IsNullOrEmpty(Icon)) account.BackColorIcon = SelectBackColorIconRandom();
             await db.Save(account);
             await Navigation.PopAsync();
         }
@@ -125,12 +145,6 @@ public class AddAccountViewModel : BaseViewModel
     private void SelectIcon(string icon)
     {
         Icon = icon;
-    }
-    private string SelectBackColorIconRandom()
-    {
-        Random random = new();
-        var index = random.Next(0, colorsBackgroundIcon.Length);
-        return colorsBackgroundIcon[index];
     }
     #endregion
     #region COMANDOS

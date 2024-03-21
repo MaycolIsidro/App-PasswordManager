@@ -1,3 +1,4 @@
+using PasswordManager.Models;
 using PasswordManager.ViewModels;
 
 namespace PasswordManager.Views;
@@ -5,10 +6,10 @@ public partial class AddAccountPage
 {
 	bool usePasswordGenerator;
 	readonly AddAccountViewModel viewModel;
-    public AddAccountPage(int idCategoria)
+    public AddAccountPage(int idCategoria, Cuenta? account = null)
 	{
 		InitializeComponent();
-		BindingContext = viewModel = new AddAccountViewModel(Navigation,idCategoria);
+		BindingContext = viewModel = new AddAccountViewModel(Navigation,idCategoria, account);
 	}
 
     private void Button_Clicked(object sender, EventArgs e)

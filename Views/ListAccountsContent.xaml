@@ -18,6 +18,8 @@
                                     <Button BackgroundColor="#C5D5FF"
                                             Text="&#xf304;"
                                             Style="{StaticResource BtnSwipedItem}"
+                                            Command="{Binding Path=BindingContext.RedirectEditAccountCommand, Source={x:Reference lstAccounts}}"
+                                            CommandParameter="{Binding .}"
                                             FontFamily="FAS" />
                                     <Button BackgroundColor="#FF9090"
                                             Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"

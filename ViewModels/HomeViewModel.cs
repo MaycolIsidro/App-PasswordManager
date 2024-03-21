@@ -10,7 +10,7 @@ namespace PasswordManager.ViewModels;
 public class HomeViewModel : BaseViewModel
 {
     #region VARIABLES
-    private ObservableCollection<Cuenta> cuentas;
+    private ObservableCollection<Cuenta> listAccounts;
     private readonly SQLiteHelper db;
     readonly TextEncript textEncript = new();
     private int numbersOfWebsite;
@@ -24,10 +24,10 @@ public class HomeViewModel : BaseViewModel
     }
     #endregion
     #region OBJETOS
-    public ObservableCollection<Cuenta> Cuentas
+    public ObservableCollection<Cuenta> ListAccounts
     {
-        get { return cuentas; }
-        set { SetValue(ref cuentas, value); }
+        get { return listAccounts; }
+        set { SetValue(ref listAccounts, value); }
     }
     public int NumbersOfWebsite
     {
@@ -47,7 +47,7 @@ public class HomeViewModel : BaseViewModel
     }
     public async Task GetCuentas()
     {
-        Cuentas = new ObservableCollection<Cuenta>(await db.GetAccountsRecent());
+        ListAccounts = new ObservableCollection<Cuenta>(await db.GetAccountsRecent());
     }
     public async Task GetTotalAccounts()
     {
@@ -55,16 +55,16 @@ public class HomeViewModel : BaseViewModel
         NumbersOfWebsite = numbersOfAccounts.Item1;
         NumbersOfApps = numbersOfAccounts.Item2;
     }
-    public async Task ShowDetails(Cuenta account)
+    public async Task RedirectEditAccount(Cuenta account)
     {
-        await MopupService.Instance.PushAsync(new DetailsAccountPage(account));
+        await Navigation.PushAsync(new AddAccountPage(account.CategoriaId, account));
     }
     public async Task DeleteAccount(Cuenta account)
     {
         bool question = await DisplayAlert("Aviso", "¿Está seguro que desea eliminar el registro?", "Sí", "No");
         if (question)
         {
-            Cuentas.Remove(account);
+            ListAccounts.Remove(account);
             await db.DeleteAccount(account);
             await GetTotalAccounts();
         }
@@ -96,7 +96,7 @@ public class HomeViewModel : BaseViewModel
     #endregion
     #region COMANDOS
     public ICommand RedirectAddCommand => new Command(async () => await RedirectAddAccount());
-    public ICommand ShowDetailsCommand => new Command<Cuenta>(async (p) => await ShowDetails(p));
+    public ICommand RedirectEditAccountCommand => new Command<Cuenta>(async (p) => await RedirectEditAccount(p));
     public ICommand DeleteAccountCommand => new Command<Cuenta>(async (p) => await DeleteAccount(p));
     public ICommand CopyToClipboardCommand => new Command<Cuenta>(CopyToClipboard);
     public ICommand RedirectListAccountsCommand => new Command<string>(async (p) => await RedirectionToListAccounts(p));
