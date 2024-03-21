@@ -84,6 +84,7 @@ public class AddAccountViewModel : BaseViewModel
     }
     private void SeleccionarCategoria(string idCategoria)
     {
+        if (idCategoria == "1") Icon = "";
         IdCategoria = int.Parse(idCategoria);
     }
     public async Task SaveAccount()
