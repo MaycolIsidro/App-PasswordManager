@@ -230,6 +230,7 @@ public class TextEncript
         if (useSymbols) valuesUse.Add(symbols);
         if (useLowers) valuesUse.Add(lowers);
         if (useUppers) valuesUse.Add(uppers);
+        if (length < valuesUse.Count) throw new Exception("La longitud de la contraseña no puede ser menor a la cantidad de reglas seleccionadas");
         Random random = new();
         string password = "";
         for (int i = 0; i < length; i++)
