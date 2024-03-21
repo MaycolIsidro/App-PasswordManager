@@ -14,15 +14,8 @@ public class ListAccountViewModel : BaseViewModel
     private readonly int idCategoria;
     readonly SQLiteHelper db = new ();
     readonly TextEncript textEncript = new();
+    List<Cuenta> accounts;
     private ObservableCollection<Cuenta> listAccounts;
-    public ObservableCollection<Cuenta> ListAccounts
-    {
-        get => listAccounts;
-        set
-        {
-            SetValue(ref listAccounts, value);
-        }
-    }
     #endregion
     #region CONSTRUCTOR
     public ListAccountViewModel(INavigation navigation, int idCategoria)
@@ -37,18 +30,29 @@ public class ListAccountViewModel : BaseViewModel
     public string TextSearch
     {
         get { return textSearch; }
-        set { SetValue(ref textSearch, value); }
+        set { SetValue(ref textSearch, value);
+            FilterAccounts();
+        }
     }
     public string Title
     {
         get { return title; }
         set { SetValue(ref title, value); }
     }
+    public ObservableCollection<Cuenta> ListAccounts
+    {
+        get => listAccounts;
+        set
+        {
+            SetValue(ref listAccounts, value);
+        }
+    }
     #endregion
     #region PROCESOS
     public async Task GetAccounts()
     {
-        ListAccounts = new ObservableCollection<Cuenta>(await db.GetAccounts(idCategoria));
+        accounts = await db.GetAccounts(idCategoria);
+        ListAccounts = new ObservableCollection<Cuenta>(accounts);
     }
     private async Task RedirectAddAccount()
     {
@@ -83,6 +87,11 @@ public class ListAccountViewModel : BaseViewModel
             ListAccounts.Remove(account);
             await db.DeleteAccount(account);
         }
+    }
+    private void FilterAccounts()
+    {
+        if (string.IsNullOrEmpty(TextSearch)) ListAccounts = new ObservableCollection<Cuenta>(accounts);
+        else ListAccounts = new ObservableCollection<Cuenta>(accounts.Where(p => p.Nombre.ToUpper().Contains(TextSearch.ToUpper())));
     }
     #endregion
     #region COMANDOS

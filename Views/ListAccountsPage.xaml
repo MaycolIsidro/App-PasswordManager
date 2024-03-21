@@ -9,7 +9,8 @@
                  BackgroundColor="#F3F6FE">
         <Frame Padding="0"
                CornerRadius="15">
-            <SearchBar Placeholder="Buscar cuentas" />
+            <SearchBar Placeholder="Buscar cuentas"
+                       Text="{Binding TextSearch}"/>
         </Frame>
         <Grid RowDefinitions="*"
               VerticalOptions="FillAndExpand">

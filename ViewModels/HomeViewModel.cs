@@ -15,6 +15,8 @@ public class HomeViewModel : BaseViewModel
     readonly TextEncript textEncript = new();
     private int numbersOfWebsite;
     private int numbersOfApps;
+    IEnumerable<Cuenta> accounts;
+    private string textSearch;
     #endregion
     #region CONSTRUCTOR
     public HomeViewModel(INavigation navigation)
@@ -39,6 +41,13 @@ public class HomeViewModel : BaseViewModel
         get { return numbersOfApps; }
         set { SetValue(ref numbersOfApps, value); }
     }
+    public string TextSearch
+    {
+        get { return textSearch; }
+        set { SetValue(ref textSearch, value);
+            FilterAccounts();
+        }
+    }
     #endregion
     #region PROCESOS
     public async Task RedirectAddAccount()
@@ -47,7 +56,8 @@ public class HomeViewModel : BaseViewModel
     }
     public async Task GetCuentas()
     {
-        ListAccounts = new ObservableCollection<Cuenta>(await db.GetAccountsRecent());
+        accounts = await db.GetAccountsRecent();
+        ListAccounts = new ObservableCollection<Cuenta>(accounts);
     }
     public async Task GetTotalAccounts()
     {
@@ -92,6 +102,11 @@ public class HomeViewModel : BaseViewModel
     {
         cuenta.UltimoAcceso = DateTime.Now;
         await db.UpdateAccount(cuenta);
+    }
+    private void FilterAccounts()
+    {
+        if (string.IsNullOrEmpty(TextSearch)) ListAccounts = new ObservableCollection<Cuenta>(accounts);
+        else ListAccounts = new ObservableCollection<Cuenta>(accounts.Where(p => p.Nombre.ToUpper().Contains(TextSearch.ToUpper())));
     }
     #endregion
     #region COMANDOS
