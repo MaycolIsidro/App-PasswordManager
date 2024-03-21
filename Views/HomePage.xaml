@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.Views.HomePage"
+             xmlns:local="clr-namespace:PasswordManager.Views"
              NavigationPage.HasNavigationBar="False">
     <Grid RowDefinitions="*"
           Padding="15"
@@ -76,136 +77,9 @@
                    FontSize="16"
                    FontAttributes="Bold"
                    Margin="0,5" />
-            <CollectionView ItemsSource="{Binding Cuentas}"
-                            x:Name="lstAccounts">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"
-                                     VerticalItemSpacing="7" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItemView>
-                                        <HorizontalStackLayout>
-                                            <Button BackgroundColor="#C5D5FF"
-                                                    Margin="5"
-                                                    Padding="10"
-                                                    MinimumHeightRequest="5"
-                                                    VerticalOptions="CenterAndExpand"
-                                                    MinimumWidthRequest="5"
-                                                    FontSize="20"
-                                                    Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
-                                                    CommandParameter="{Binding .}"
-                                                    Text="&#xf304;"
-                                                    FontFamily="FAS"
-                                                    CornerRadius="50" />
-                                            <Button BackgroundColor="#FF9090"
-                                                    Margin="5"
-                                                    Padding="10"
-                                                    MinimumHeightRequest="5"
-                                                    VerticalOptions="CenterAndExpand"
-                                                    MinimumWidthRequest="5"
-                                                    FontSize="20"
-                                                    Text="&#xf2ed;"
-                                                    Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={x:Reference lstAccounts}}"
-                                                    CommandParameter="{Binding .}"
-                                                    FontFamily="FAR"
-                                                    CornerRadius="50" />
-                                        </HorizontalStackLayout>
-                                    </SwipeItemView>
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <Frame Padding="10"
-                                   CornerRadius="15">
-                                <StackLayout Spacing="10"
-                                             Orientation="Horizontal">
-                                    <Frame Padding="0"
-                                           CornerRadius="40"
-                                           HeightRequest="55"
-                                           WidthRequest="55"
-                                           VerticalOptions="CenterAndExpand"
-                                           BackgroundColor="{Binding BackColorIcon}">
-                                        <StackLayout VerticalOptions="Center">
-                                            <Image Source="{Binding IconImage}"
-                                                   VerticalOptions="Center"
-                                                   HeightRequest="35">
-                                                <Image.Triggers>
-                                                    <DataTrigger TargetType="Image"
-                                                                 Binding="{Binding IconImage}"
-                                                                 Value="">
-                                                        <Setter Property="IsVisible"
-                                                                Value="False" />
-                                                    </DataTrigger>
-                                                </Image.Triggers>
-                                            </Image>
-                                            <Label Text="{Binding IconText}"
-                                                   FontSize="28"
-                                                   Margin="0"
-                                                   HorizontalOptions="Center"
-                                                   VerticalOptions="Center"
-                                                   Padding="0"
-                                                   TextColor="White"
-                                                   FontAttributes="Bold">
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label"
-                                                                 Binding="{Binding IconText}"
-                                                                 Value="">
-                                                        <Setter Property="IsVisible"
-                                                                Value="False" />
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
-                                        </StackLayout>
-                                    </Frame>
-                                    <StackLayout Spacing="2"
-                                                 HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding Nombre}"
-                                               FontSize="17"
-                                               FontAttributes="Bold" />
-                                        <Label Text="usuario@gmail.com"
-                                               FontSize="15" />
-                                        <HorizontalStackLayout Spacing="5">
-                                            <Label Text="{Binding PasswordView}"
-                                                   VerticalOptions="Center" />
-                                            <Button Text="&#xf06e;"
-                                                    Padding="3"
-                                                    FontSize="12"
-                                                    BackgroundColor="Transparent"
-                                                    TextColor="Black"
-                                                    MinimumHeightRequest="5"
-                                                    MinimumWidthRequest="5"
-                                                    Command="{Binding Path=BindingContext.ShowPasswordCommand, Source={x:Reference lstAccounts}}"
-                                                    CommandParameter="{Binding .}"
-                                                    FontFamily="FAS" />
-                                        </HorizontalStackLayout>
-                                    </StackLayout>
-                                    <Button Text="&#xf0c5;"
-                                            Padding="5"
-                                            TextColor="Black"
-                                            BackgroundColor="Transparent"
-                                            MinimumHeightRequest="5"
-                                            MinimumWidthRequest="5"
-                                            FontSize="17"
-                                            VerticalOptions="Center"
-                                            Margin="0,0,5,0"
-                                            FontFamily="FAR"
-                                            Command="{Binding Path=BindingContext.CopyToClipboardCommand, Source={x:Reference lstAccounts}}"
-                                            CommandParameter="{Binding .}" />
-                                </StackLayout>
-                            </Frame>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                <CollectionView.EmptyView>
-                    <Label Text="Aún no has registrado cuentas"
-                           HorizontalOptions="CenterAndExpand" />
-                </CollectionView.EmptyView>
-            </CollectionView>
+            <local:ListAccountsContent />
         </VerticalStackLayout>
         <Button Style="{StaticResource BtnFloating}"
-
                 Command="{Binding RedirectAddCommand}" />
     </Grid>
 </ContentPage>
