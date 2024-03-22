@@ -18,96 +18,101 @@
         <StackLayout Spacing="15">
             <Frame Padding="20,5"
                    CornerRadius="40">
-                <HorizontalStackLayout Spacing="7">
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
                     <Label Text="&#xf007;"
                            VerticalOptions="Center"
                            TextColor="Silver"
                            FontSize="16"
                            FontFamily="FAS" />
                     <Entry Placeholder="Nombres y apellidos"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           HorizontalOptions="FillAndExpand"
                            Text="{Binding Name}"
                            x:Name="TxtNombres">
                         <Entry.Behaviors>
                             <behaviors:EntryValidator />
                         </Entry.Behaviors>
                     </Entry>
-                </HorizontalStackLayout>
+                </StackLayout>
             </Frame>
             <Frame Padding="20,5"
                    CornerRadius="40">
-                <HorizontalStackLayout Spacing="7">
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
                     <Label Text="&#xf095;"
                            VerticalOptions="Center"
                            TextColor="Silver"
                            FontSize="16"
                            FontFamily="FAS" />
                     <Entry Placeholder="Telefono"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           HorizontalOptions="FillAndExpand"
                            Text="{Binding Phone}"
                            x:Name="TxtPhone">
                         <Entry.Behaviors>
                             <behaviors:EntryValidator />
                         </Entry.Behaviors>
                     </Entry>
-                </HorizontalStackLayout>
+                </StackLayout>
             </Frame>
             <Frame Padding="20,5"
                    CornerRadius="40">
-                <HorizontalStackLayout Spacing="7">
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
                     <Label Text="&#xf007;"
                            VerticalOptions="Center"
                            TextColor="Silver"
                            FontSize="16"
                            FontFamily="FAS" />
                     <Entry Placeholder="Usuario"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           HorizontalOptions="FillAndExpand"
                            Text="{Binding User}"
                            x:Name="TxtUser">
                         <Entry.Behaviors>
                             <behaviors:EntryValidator />
                         </Entry.Behaviors>
                     </Entry>
-                </HorizontalStackLayout>
+                </StackLayout>
             </Frame>
             <Frame Padding="20,5"
                    CornerRadius="40">
-                <HorizontalStackLayout Spacing="7">
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
                     <Label Text="&#xf023;"
                            VerticalOptions="Center"
                            TextColor="Silver"
                            FontSize="16"
                            FontFamily="FAS" />
                     <Entry Placeholder="Contraseña"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
                            Text="{Binding Password}"
+                           HorizontalOptions="FillAndExpand"
                            IsPassword="True"
                            x:Name="TxtPassword">
                         <Entry.Behaviors>
                             <behaviors:EntryValidator />
                         </Entry.Behaviors>
                     </Entry>
-                </HorizontalStackLayout>
+                </StackLayout>
             </Frame>
             <Frame Padding="20,5"
                    CornerRadius="40">
-                <HorizontalStackLayout Spacing="7">
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
                     <Label Text="&#xf084;"
                            VerticalOptions="Center"
                            TextColor="Silver"
                            FontSize="16"
                            FontFamily="FAS" />
                     <Entry Placeholder="Pin"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
                            Text="{Binding ClavePin}"
                            Keyboard="Numeric"
+                           HorizontalOptions="FillAndExpand"
                            MaxLength="6"
                            x:Name="TxtPin">
                         <Entry.Behaviors>
                             <behaviors:EntryValidator />
                         </Entry.Behaviors>
                     </Entry>
-                </HorizontalStackLayout>
+                </StackLayout>
             </Frame>
         </StackLayout>
         <local:FrameErrorContent />

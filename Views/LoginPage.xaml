@@ -16,16 +16,17 @@
         <StackLayout Spacing="20">
             <Frame Padding="20,5"
                    CornerRadius="40">
-                <HorizontalStackLayout Spacing="7">
+                <StackLayout Spacing="7"
+                             Orientation="Horizontal">
                     <Label Text="&#xf007;"
                            VerticalOptions="Center"
                            TextColor="Silver"
                            FontSize="16"
                            FontFamily="FAS" />
                     <Entry Placeholder="Usuario"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
+                           HorizontalOptions="FillAndExpand"
                            Text="{Binding User}"/>
-                </HorizontalStackLayout>
+                </StackLayout>
             </Frame>
             <Frame Padding="20,5"
                    CornerRadius="40">
@@ -38,7 +39,6 @@
                            FontFamily="FAS" />
                     <Entry Placeholder="Contraseña"
                            HorizontalOptions="FillAndExpand"
-                           PlaceholderColor="{AppThemeBinding Dark=White, Light=Gray}"
                            Text="{Binding Password}"
                            IsPassword="True" />
                     <Label Text="&#xf06e;"
