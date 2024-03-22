@@ -8,6 +8,7 @@ namespace PasswordManager.ViewModels
     public class SiginViewModel : BaseViewModel
     {
         #region VARIABLES
+        private string error = "";
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string Phone { get; set; }
@@ -25,6 +26,11 @@ namespace PasswordManager.ViewModels
         }
         #endregion
         #region OBJETOS
+        public string Error
+        {
+            get { return error; }
+            set { SetValue(ref error, value); }
+        }
         #endregion
         #region PROCESOS
         public async Task Return()
@@ -50,7 +56,6 @@ namespace PasswordManager.ViewModels
         #endregion
         #region COMANDOS
         public ICommand ReturnCommand => new Command(async () => await Return());
-        public ICommand SaveCommand => new Command(async () => await SaveUser());
         #endregion
     }
 }
