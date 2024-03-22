@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.Views.FrameErrorContent">
+    <Frame BackgroundColor="#FFC8C8"
+           Padding="10,5"
+           Margin="15"
+           HorizontalOptions="Center"
+           BorderColor="Transparent">
+        <Label Text="{Binding Error}"
+               TextColor="#FF3737"
+               FontSize="15"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <Frame.Triggers>
+            <DataTrigger TargetType="Frame"
+                         Binding="{Binding Error}"
+                         Value="">
+                <Setter Property="IsVisible"
+                        Value="False" />
+            </DataTrigger>
+        </Frame.Triggers>
+    </Frame>
+</ContentView>
