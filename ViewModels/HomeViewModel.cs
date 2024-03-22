@@ -1,5 +1,4 @@
-﻿using Mopups.Services;
-using PasswordManager.Data;
+﻿using PasswordManager.Data;
 using PasswordManager.Helpers;
 using PasswordManager.Models;
 using PasswordManager.Views;
@@ -17,11 +16,13 @@ public class HomeViewModel : BaseViewModel
     private int numbersOfApps;
     IEnumerable<Cuenta> accounts;
     private string textSearch;
+    public string IconUser { get; set; }
     #endregion
     #region CONSTRUCTOR
-    public HomeViewModel(INavigation navigation)
+    public HomeViewModel(INavigation navigation, User user)
     {
         Navigation = navigation;
+        IconUser = user.Name[0].ToString().ToUpper();
         db = new SQLiteHelper();
     }
     #endregion
