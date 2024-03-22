@@ -1,24 +1,23 @@
-﻿using Mopups.Services;
-using PasswordManager.Data;
+﻿using PasswordManager.Data;
 using PasswordManager.Helpers;
 using PasswordManager.Models;
 using System.Windows.Input;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PasswordManager.ViewModels;
 public class AddAccountViewModel : BaseViewModel
 {
     #region VARIABLES
     private int lengthPassword = 16;
-    private int idCategoria;
     private string errorPasswordGenerator = "";
     private List<string> icons = ["facebook","instagram","snapchat"];
     private string icon;
     string _Password;
     private Cuenta account;
     private string title;
-    public string SitioWeb { get; set; }
-    public string Usuario { get; set; }
+    private string nombre;
+    private string usuario;
+    private string error = "";
+    private int idCategoria;
     public bool UseNumbers { get; set; } = true;
     public bool UseSymbols { get; set; } = true;
     public bool UseUppers { get; set; } = true;
@@ -36,7 +35,7 @@ public class AddAccountViewModel : BaseViewModel
         {
             Title = "Editar cuenta";
             Account = account;
-            SitioWeb = Account.Nombre;
+            Nombre = Account.Nombre;
             Usuario = Account.Usuario;
             Icon = Account.IconImage;
             Password = encript.DesencriptPassword(Account.Password);
@@ -84,6 +83,21 @@ public class AddAccountViewModel : BaseViewModel
         get { return title; }
         set { SetValue(ref title, value); }
     }
+    public string Nombre
+    {
+        get { return nombre; }
+        set { SetValue(ref nombre, value); }
+    }
+    public string Usuario
+    {
+        get { return usuario; }
+        set { SetValue(ref usuario, value); }
+    }
+    public string Error
+    {
+        get { return error; }
+        set { SetValue(ref error, value); }
+    }
     #endregion
     #region PROCESOS
     private void GeneratePassword()
@@ -111,7 +125,7 @@ public class AddAccountViewModel : BaseViewModel
             var password = encript.EncriptPassword(Password);
             if (Account != null)
             {
-                Account.Nombre = SitioWeb;
+                Account.Nombre = Nombre;
                 Account.UltimoAcceso = DateTime.Now;
                 Account.Usuario = Usuario;
                 Account.Password = password;
@@ -123,7 +137,7 @@ public class AddAccountViewModel : BaseViewModel
             }
             Cuenta account = new()
             {
-                Nombre = SitioWeb,
+                Nombre = Nombre,
                 UltimoAcceso = DateTime.Now,
                 Usuario = Usuario,
                 Password = password,
@@ -138,10 +152,7 @@ public class AddAccountViewModel : BaseViewModel
             await DisplayAlert("Aviso", "No se pudo registrar la cuenta", "Ok");
         }
     }
-    private void AddPasswordLength()
-    {
-        LengthPassword++;
-    }
+    private void AddPasswordLength() => LengthPassword++;
     private void DecreasePasswordLength()
     {
         if (LengthPassword > 0) LengthPassword--;
