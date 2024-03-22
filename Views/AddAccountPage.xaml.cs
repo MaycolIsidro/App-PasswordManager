@@ -23,22 +23,30 @@ public partial class AddAccountPage
 	private bool ValidateForm()
 	{
 		bool isValid = true;
-		if (string.IsNullOrEmpty(viewModel.SitioWeb))
+        if (string.IsNullOrEmpty(viewModel.Nombre))
 		{
-			isValid = false;
-			viewModel.SitioWeb = "";
+            viewModel.Error = "Debe completar todos los campos";
+            isValid = false;
+			viewModel.Nombre = "";
         }
 		if (string.IsNullOrEmpty(viewModel.Usuario))
 		{
+            viewModel.Error = "Debe completar todos los campos";
 			isValid = false;
 			viewModel.Usuario = "";
         }
 		if (string.IsNullOrEmpty(viewModel.Password))
 		{
+            viewModel.Error = "Debe completar todos los campos";
 			isValid = false;
 			viewModel.Password = "";
         }
-		return isValid;
+        if (viewModel.IdCategoria == 0)
+        {
+            viewModel.Error = "Debe seleccionar una categoría";
+            isValid = false;
+        }
+        return isValid;
 	}
     private async void BtnGuardar_Clicked(object sender, EventArgs e)
     {
