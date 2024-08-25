@@ -78,7 +78,7 @@
                                 <Label Text="{Binding Nombre}"
                                        FontSize="17"
                                        FontAttributes="Bold" />
-                                <Label Text="usuario@gmail.com"
+                                <Label Text="{Binding Usuario}"
                                        FontSize="15" />
                                 <HorizontalStackLayout Spacing="5">
                                     <Label Text="{Binding PasswordView}"
